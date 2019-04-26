@@ -57,9 +57,9 @@ namespace SpirV___get_fail_reasons
             }
             finally
             {
-                //workBook.SaveAs(TestSession + ".xlsx");
-                //workBook.Close();
-                //excel.Quit();
+                workBook.SaveAs(TestSession + ".xlsx");
+                workBook.Close();
+                excel.Quit();
             }
         }
 

@@ -38,16 +38,16 @@ namespace SpirV___get_fail_reasons
 
                 for(int i = 0; i < Results.Count; i++)
                 {
-                    workSheets[0].Cells[1, i + 1] = Results[i].Name;
+                    workSheets[0].Cells[i + 1, 1] = Results[i].Name;
                     if (Results[i].FailedSubTask.Count == 0)
-                        workSheets[0].Columns[i + 1].Interior.Color = Color.Green;
+                        workSheets[0].Rows[i + 1].Interior.Color = Color.Green;
 
                     for (int j = 0; j < Results[i].FailedSubTask.Count; j++)
                     {
                         if (Results[i].FailedSubTask[j].Length > 5000)
-                            workSheets[0].Cells[j + 2, i + 1] = Results[i].FailedSubTask[j].Substring(0, 5000);
+                            workSheets[0].Cells[i + 1 , j + 2] = Results[i].FailedSubTask[j].Substring(0, 5000);
                         else
-                            workSheets[0].Cells[j + 2, i + 1] = Results[i].FailedSubTask[j];
+                            workSheets[0].Cells[i + 1, j + 2] = Results[i].FailedSubTask[j];
                     }
                 }               
             }

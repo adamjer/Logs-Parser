@@ -21,9 +21,9 @@ namespace SpirV___get_fail_reasons
                     JobSetAnalyzer.Instance.InitWebClient();
                     JobSetAnalyzer.Instance.GetJobSetData();
 
-                    LogsFromJobSetAnalyzer analyzer = new LogsFromJobSetAnalyzer(JobSetAnalyzer.Instance.Results, JobSetAnalyzer.Instance.webClient);
+                    LogsFromJobSetAnalyzer analyzer = new LogsFromJobSetAnalyzer(JobSetAnalyzer.Instance);
                     analyzer.Analyze();
-                    ExcelDataWriter excelDataWriter = new ExcelDataWriter(analyzer.Results, JobSetAnalyzer.Instance.JobsetID);
+                    ExcelDataWriter excelDataWriter = new ExcelDataWriter(analyzer.Results, JobSetAnalyzer.Instance);
                     excelDataWriter.Write();
                 }
             }

@@ -12,6 +12,9 @@ namespace SpirV___get_fail_reasons
         [JsonProperty(PropertyName = "id")]
         public String ID { get; set; }
 
+        [JsonProperty(PropertyName = "name")]
+        public String Name { get; set; }
+
         [JsonProperty(PropertyName = "results")]
         public IList<Result> Results { get; set; }
     }

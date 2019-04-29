@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SpirV___get_fail_reasons
@@ -13,6 +14,7 @@ namespace SpirV___get_fail_reasons
         public String JobsetID { get; set; }
         public WebClient webClient { get; set; }
         public SortedSet<Result> Results { get; set; }
+        public String Name { get; set; }
 
         private static JobSetAnalyzer m_oInstance = null;
         private static readonly object m_oPadLock = new object();
@@ -52,6 +54,7 @@ namespace SpirV___get_fail_reasons
             this.jsonResult = this.webClient.DownloadString(resultsLink);
 
             this.jobSet = JsonConvert.DeserializeObject<JobSet>(this.jsonResult);
+            this.Name = Regex.Match(this.jobSet.Jobs[0].Name, @"gfx-driver-ci-master-\d+").Value;
             this.OrderJobSet();
         }
 

@@ -11,21 +11,19 @@ namespace SpirV___get_fail_reasons
 {
     class LogsFromJobSetAnalyzer
     {
-        private SortedSet<Result> Tests { get; set; }
-        private WebClient WebClient { get; set; }
+        private JobSetAnalyzer JobSetAnalyzer { get; set; }
         public List<SpirVTask> Results { get; set; }
 
-        public LogsFromJobSetAnalyzer(SortedSet<Result> results, WebClient webClient)
+        public LogsFromJobSetAnalyzer(JobSetAnalyzer jobSetAnalyzer)
         {
-            this.Tests = results;
-            this.WebClient = webClient;
+            this.JobSetAnalyzer = jobSetAnalyzer;
             this.Results = new List<SpirVTask>();
         }
 
         public void Analyze()
         {
             String testNumber, hyperlink, log;
-            foreach (Result result in Tests)
+            foreach (Result result in this.JobSetAnalyzer.Results)
             {
                 if (result.Artifacts != null)
                 {
@@ -40,7 +38,7 @@ namespace SpirV___get_fail_reasons
 
                             try
                             {
-                                log = WebClient.DownloadString(hyperlink);
+                                log = this.JobSetAnalyzer.webClient.DownloadString(hyperlink);
                                 Match firstHeader = null, secondHeader = null;
                                 while (true)
                                 {

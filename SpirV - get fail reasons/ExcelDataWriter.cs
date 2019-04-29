@@ -11,16 +11,16 @@ namespace SpirV___get_fail_reasons
     class ExcelDataWriter
     {
         private List<SpirVTask> Results { get; set; }
-        private String TestSession { get; set; }
+        private JobSetAnalyzer JobSetAnalyzer { get; set; }
 
         private Application excel;
         private Workbook workBook;
         private List<Worksheet> workSheets;
 
-        public ExcelDataWriter(List<SpirVTask> r, String ts)
+        public ExcelDataWriter(List<SpirVTask> r, JobSetAnalyzer jsa)
         {
             Results = r;
-            TestSession = ts;
+            JobSetAnalyzer = jsa;
         }
 
         public void Write()
@@ -36,18 +36,36 @@ namespace SpirV___get_fail_reasons
                 workBook = excel.Workbooks.Add();
                 workSheets.Add(workBook.ActiveSheet);
 
+                workSheets[0].Name = JobSetAnalyzer.Name;
+                workSheets[0].Cells[1, 1] = "TestName";
+                workSheets[0].Cells[1, 2] = "Status";
+                workSheets[0].Cells[1, 3] = "Summary";
+                for (int i = 1; i <= max; ++i)
+                    workSheets[0].Cells[1, i + 3] = "Subcase" + i;
+
+                int column, row;
                 for(int i = 0; i < Results.Count; i++)
                 {
-                    workSheets[0].Cells[i + 1, 1] = Results[i].Name;
-                    if (Results[i].FailedSubTask.Count == 0)
-                        workSheets[0].Rows[i + 1].Interior.Color = Color.Green;
+                    row = i + 2;
+                    workSheets[0].Cells[row, 1] = Results[i].Name;
+                    if(Results[i].FailedSubTask.Count > 0)
+                    {
+                        workSheets[0].Cells[row, 2] = "Failed";
+                        workSheets[0].Cells[row, 2].Interior.Color = Color.Red;
+                    }
+                    else
+                    {
+                        workSheets[0].Cells[row, 2] = "Passed";
+                        workSheets[0].Cells[row, 2].Interior.Color = Color.Green;
+                    }
 
                     for (int j = 0; j < Results[i].FailedSubTask.Count; j++)
                     {
+                        column = j + 4;
                         if (Results[i].FailedSubTask[j].Length > 5000)
-                            workSheets[0].Cells[i + 1 , j + 2] = Results[i].FailedSubTask[j].Substring(0, 5000);
+                            workSheets[0].Cells[row , column] = Results[i].FailedSubTask[j].Substring(0, 5000);
                         else
-                            workSheets[0].Cells[i + 1, j + 2] = Results[i].FailedSubTask[j];
+                            workSheets[0].Cells[row, column] = Results[i].FailedSubTask[j];
                     }
                 }               
             }
@@ -57,7 +75,7 @@ namespace SpirV___get_fail_reasons
             }
             finally
             {
-                workBook.SaveAs(TestSession + ".xlsx");
+                workBook.SaveAs(JobSetAnalyzer.JobsetID + ".xlsx");
                 workBook.Close();
                 excel.Quit();
             }

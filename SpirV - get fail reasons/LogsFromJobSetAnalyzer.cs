@@ -33,8 +33,9 @@ namespace SpirV___get_fail_reasons
                     {
                         if (Regex.IsMatch(taskLog, $"{result.BusinessAttributes.ItemName}.*.log"))
                         {
-                            hyperlink = $"http://gtax-igk.intel.com/logs/storage/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
+                            hyperlink = $"http://gtax-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
                             task.Name = result.BusinessAttributes.ItemName;
+                            task.SetLink(result.JobID, result.ID);
 
                             try
                             {
@@ -45,7 +46,7 @@ namespace SpirV___get_fail_reasons
                                     if (firstHeader == null && secondHeader == null)
                                     {
                                         firstHeader = Regex.Match(log, @"--> [0-9.]+ -.*subcase:");
-                                        secondHeader = Regex.Match(log, @"--< [0-9.]+ -.*subcase (passed|failed)\.");                                        
+                                        secondHeader = Regex.Match(log, @"--< [0-9.]+ -.*subcase (passed|failed|not run)");
                                     }
                                     else
                                     {
@@ -56,8 +57,8 @@ namespace SpirV___get_fail_reasons
                                             break;
                                     }
 
-                                    if (secondHeader.Value.Contains("failed"))
-                                        task.FailedSubTask.Add(ReadSubTask(log, firstHeader, secondHeader));
+                                    //if (secondHeader.Value.Contains("failed"))
+                                    task.SubTask.Add(ReadSubTask(log, firstHeader, secondHeader));
                                 }
                                 Results.Add(task);
                             }
@@ -75,12 +76,14 @@ namespace SpirV___get_fail_reasons
         private String ReadSubTask(String log, Match firstHeader, Match secondHeader)
         {
             String line;
-            StringReader reader = new StringReader(log.Substring(firstHeader.Index, secondHeader.Index + secondHeader.Length- firstHeader.Index));
+            StringReader reader = new StringReader(log.Substring(firstHeader.Index, secondHeader.Index + secondHeader.Length - firstHeader.Index));
             StringBuilder builder = new StringBuilder();
 
             while ((line = reader.ReadLine()) != secondHeader.Value)
             {
-                if(!builder.ToString().Contains(line))
+                if (line == null)
+                    break;
+                if (!builder.ToString().Contains(line))
                     builder.AppendLine(line);
             }
             builder.AppendLine(line);

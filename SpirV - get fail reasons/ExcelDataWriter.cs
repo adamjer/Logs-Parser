@@ -12,16 +12,16 @@ namespace SpirV___get_fail_reasons
     class ExcelDataWriter
     {
         private List<SpirVTask> Results { get; set; }
-        private JobSetAnalyzer JobSetAnalyzer { get; set; }
+        private DataAnalyzer DataAnalyzer { get; set; }
 
         private Application excel;
         private Workbook workBook;
         private List<Worksheet> workSheets;
 
-        public ExcelDataWriter(List<SpirVTask> r, JobSetAnalyzer jsa)
+        public ExcelDataWriter(List<SpirVTask> r, DataAnalyzer jsa)
         {
             Results = r;
-            JobSetAnalyzer = jsa;
+            DataAnalyzer = jsa;
         }
 
         /*public void Write()
@@ -37,7 +37,7 @@ namespace SpirV___get_fail_reasons
                 workBook = excel.Workbooks.Add();
                 workSheets.Add(workBook.ActiveSheet);
 
-                workSheets[0].Name = JobSetAnalyzer.Name;
+                workSheets[0].Name = DataAnalyzer.Name;
                 workSheets[0].Cells[1, 1] = "TestName";
                 workSheets[0].Cells[1, 2] = "Status";
                 workSheets[0].Cells[1, 3] = "Summary";
@@ -76,7 +76,7 @@ namespace SpirV___get_fail_reasons
             }
             finally
             {
-                workBook.SaveAs(JobSetAnalyzer.JobsetID + ".xlsx");
+                workBook.SaveAs(DataAnalyzer.JobsetID + ".xlsx");
                 workBook.Close();
                 excel.Quit();
             }*/
@@ -94,7 +94,7 @@ namespace SpirV___get_fail_reasons
                 workBook = excel.Workbooks.Add();
                 workSheets.Add(workBook.ActiveSheet);
 
-                workSheets[0].Name = JobSetAnalyzer.Name;
+                workSheets[0].Name = DataAnalyzer.Name;
                 workSheets[0].Cells[1, 1] = "TestName";
                 workSheets[0].Cells[1, 2] = "Status";
                 workSheets[0].Cells[1, 3] = "Subtasks Count";
@@ -135,7 +135,7 @@ namespace SpirV___get_fail_reasons
             }
             finally
             {
-                workBook.SaveAs(JobSetAnalyzer.JobsetID + ".xlsx");
+                workBook.SaveAs(DataAnalyzer.JobsetID + ".xlsx");
                 workBook.Close();
                 excel.Quit();
             }
@@ -154,7 +154,7 @@ namespace SpirV___get_fail_reasons
                 workBook = excel.Workbooks.Add();
                 workSheets.Add(workBook.ActiveSheet);
 
-                workSheets[0].Name = JobSetAnalyzer.Name;
+                workSheets[0].Name = DataAnalyzer.Name;
                 workSheets[0].Cells[1, 1] = "Test Name";
                 workSheets[0].Cells[1, 2] = "Subcase";
                 workSheets[0].Cells[1, 3] = "Status";
@@ -210,7 +210,7 @@ namespace SpirV___get_fail_reasons
             }
             finally
             {
-                workBook.SaveAs(JobSetAnalyzer.JobsetID + ".xlsx");
+                workBook.SaveAs(DataAnalyzer.JobsetID + ".xlsx");
                 workBook.Close();
                 excel.Quit();
             }

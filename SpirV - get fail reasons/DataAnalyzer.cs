@@ -9,21 +9,39 @@ using System.Threading.Tasks;
 
 namespace SpirV___get_fail_reasons
 {
-    sealed class JobSetAnalyzer
+    sealed class DataAnalyzer
     {
         public String JobsetID { get; set; }
+        public String JobSetSessionID { get; set; }
         public WebClient webClient { get; set; }
         public SortedSet<Result> Results { get; set; }
         public String Name { get; set; }
+        public JobSetSessionData JobSetSession { get; set; }
 
-        private static JobSetAnalyzer m_oInstance = null;
+        private String ResultsLink
+        {
+            get
+            {
+                if (Program.environment == EnvironmentType.Silicon)
+                    return $"https://gtax-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
+                else if (Program.environment == EnvironmentType.Simulation)
+                    return $"https://gtax-presi-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
+                else if (Program.environment == EnvironmentType.Emulation)
+                    throw new Exception("Emulation not supported yet!");
+                else
+                    return "";
+            }
+        }
+
+        private static DataAnalyzer m_oInstance = null;
         private static readonly object m_oPadLock = new object();
         private int m_nCounter = 0;
         private String jsonResult;
         private JobSet jobSet;
         
+        
 
-        public static JobSetAnalyzer Instance
+        public static DataAnalyzer Instance
         {
             get
             {
@@ -31,7 +49,7 @@ namespace SpirV___get_fail_reasons
                 {
                     if (m_oInstance == null)
                     {
-                        m_oInstance = new JobSetAnalyzer();
+                        m_oInstance = new DataAnalyzer();
                     }
                     return m_oInstance;
                 }
@@ -56,6 +74,15 @@ namespace SpirV___get_fail_reasons
             this.jobSet = JsonConvert.DeserializeObject<JobSet>(this.jsonResult);
             this.Name = Regex.Match(this.jobSet.Jobs[0].Name, @"gfx-driver-ci-master-\d+").Value;
             this.OrderJobSet();
+            this.jsonResult = "";
+        }
+
+        public void GetJobSetSessionData()
+        {
+            this.jsonResult = this.webClient.DownloadString(ResultsLink);
+
+            this.JobSetSession = JsonConvert.DeserializeObject<JobSetSessionData>(this.jsonResult);
+            this.jsonResult = "";
         }
 
         private void OrderJobSet()
@@ -109,7 +136,7 @@ namespace SpirV___get_fail_reasons
             return password;
         }
 
-        private JobSetAnalyzer()
+        private DataAnalyzer()
         {
             m_nCounter = 1;
         }

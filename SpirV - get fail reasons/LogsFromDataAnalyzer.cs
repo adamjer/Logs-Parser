@@ -9,21 +9,33 @@ using System.Threading.Tasks;
 
 namespace SpirV___get_fail_reasons
 {
-    class LogsFromJobSetAnalyzer
+    class LogsFromDataAnalyzer
     {
-        private JobSetAnalyzer JobSetAnalyzer { get; set; }
+        private DataAnalyzer DataAnalyzer { get; set; }
         public List<SpirVTask> Results { get; set; }
 
-        public LogsFromJobSetAnalyzer(JobSetAnalyzer jobSetAnalyzer)
+        private String Hyperlink(String jobId, String testNumber, String taskLog)
         {
-            this.JobSetAnalyzer = jobSetAnalyzer;
+            if (Program.environment == EnvironmentType.Silicon)
+                return $"http://gtax-igk.intel.com/logs/jobs/jobs/0000/{jobId.Substring(0, 4)}/{jobId}/logs/tests/{testNumber}/{taskLog}";
+            else if (Program.environment == EnvironmentType.Simulation)
+                return $"https://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{jobId.Substring(0, 4)}/{jobId}/logs/tests/{testNumber}/{taskLog}";
+            else if (Program.environment == EnvironmentType.Emulation)
+                throw new Exception("Emulation not supported yet!");
+            else
+                return "";
+        }
+
+        public LogsFromDataAnalyzer(DataAnalyzer dataAnalyzer)
+        {
+            this.DataAnalyzer = dataAnalyzer;
             this.Results = new List<SpirVTask>();
         }
 
         public void Analyze()
         {
             String testNumber, hyperlink, log;
-            foreach (Result result in this.JobSetAnalyzer.Results)
+            foreach (Result result in this.DataAnalyzer.Results)
             {
                 if (result.Artifacts != null)
                 {
@@ -33,13 +45,13 @@ namespace SpirV___get_fail_reasons
                     {
                         if (Regex.IsMatch(taskLog, $"{result.BusinessAttributes.ItemName}.*.log"))
                         {
-                            hyperlink = $"http://gtax-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
+                            hyperlink = this.Hyperlink(result.JobID, testNumber, taskLog);
                             task.Name = result.BusinessAttributes.ItemName;
                             task.SetLink(result.JobID, result.ID);
 
                             try
                             {
-                                log = this.JobSetAnalyzer.webClient.DownloadString(hyperlink);
+                                log = this.DataAnalyzer.webClient.DownloadString(hyperlink);
                                 Match firstHeader = null, secondHeader = null;
                                 while (true)
                                 {

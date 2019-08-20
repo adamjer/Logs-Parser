@@ -35,6 +35,11 @@ namespace SpirV___get_fail_reasons
         public int CompareTo(object obj)
         {
             Result other = (Result)obj;
+            if (other.BusinessAttributes.ItemName == null)
+                return 0;
+            if (this.BusinessAttributes.ItemName == null)
+                return 1;
+
             return this.BusinessAttributes.ItemName.CompareTo(other.BusinessAttributes.ItemName);
         }
     }

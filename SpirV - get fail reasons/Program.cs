@@ -32,6 +32,7 @@ namespace SpirV___get_fail_reasons
             return args.Except(new string[] { args[index] }).ToArray();
         }
 
+        //choose the way application works
         private static void ParseExecutionType(ref string[] args)
         {
             for (int i = 0; i < args.Length; i++)
@@ -49,6 +50,7 @@ namespace SpirV___get_fail_reasons
             }
         }
 
+        //unused TODO -> choose percentage of conformance similarity below which images won't be downloaded
         private static void ParseConformancePassRatio(ref string[] args)
         {
             for (int i = 0; i < args.Length; i++)
@@ -63,6 +65,7 @@ namespace SpirV___get_fail_reasons
             }
         }
 
+        //choose where to save images
         private static void ParseOutputDirectory(ref string[] args)
         {
             for (int i = 0; i < args.Length; i++)
@@ -77,6 +80,7 @@ namespace SpirV___get_fail_reasons
             }
         }
 
+        //choose to delete all images that are in output directory
         private static void ParseClear(ref string[] args)
         {
             for (int i = 0; i < args.Length; i++)
@@ -91,6 +95,7 @@ namespace SpirV___get_fail_reasons
             }
         }
 
+        //choose environment
         private static void ParseEnvironment(ref string[] args)
         {
             for (int i = 0; i < args.Length; i++)

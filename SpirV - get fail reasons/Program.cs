@@ -11,6 +11,7 @@ namespace SpirV___get_fail_reasons
     {
         public static ExecutionType executionType = ExecutionType.GetSpirV;
         public static EnvironmentType environment = EnvironmentType.Silicon;
+        public static ExcelDataSaveType excelSaveType = ExcelDataSaveType.Basic;
         public static string outputPath = @"\\samba-users.igk.intel.com\samba\Users\ajerecze\NNImages";
         public static double passRatio = 0.0;
         public static bool Clear = false;
@@ -43,7 +44,8 @@ namespace SpirV___get_fail_reasons
                         executionType = ExecutionType.GetSpirV;
                     else if (args[i + 1].ToLower() == "getcorruptedimages")
                         executionType = ExecutionType.GetCorruptedImages;
-
+                    else if (args[i + 1].ToLower() == "getfatalsfromcobalt")
+                        executionType = ExecutionType.GetFatalsFromCobalt;
                     args = RemoveUsedArguments(args, i);
                     break;
                 }
@@ -115,11 +117,32 @@ namespace SpirV___get_fail_reasons
             }
         }
 
+        //choose environment
+        private static void ParseWriteExcelType(ref string[] args)
+        {
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i].ToLower() == "-excel")
+                {
+                    if (args[i + 1].ToLower() == "basic")
+                        excelSaveType = ExcelDataSaveType.Basic;
+                    else if (args[i + 1].ToLower() == "advanced")
+                        excelSaveType = ExcelDataSaveType.Advanced;
+                    else if (args[i + 1].ToLower() == "fatal")
+                        excelSaveType = ExcelDataSaveType.Fatal;
+
+                    args = RemoveUsedArguments(args, i);
+                    break;
+                }
+            }
+        }
+
         public static void Parse(ref string[] args)
         {
             ParseExecutionType(ref args);
             ParseOutputDirectory(ref args);
             ParseConformancePassRatio(ref args);
+            ParseWriteExcelType(ref args);
             ParseClear(ref args);
             ParseEnvironment(ref args);
         }
@@ -135,6 +158,8 @@ namespace SpirV___get_fail_reasons
                 spirVProgram.Main();
             else if (executionType == ExecutionType.GetCorruptedImages)
                 GetCorruptedImagesProgram.Main();
+            else if (executionType == ExecutionType.GetFatalsFromCobalt)
+                GetFatalsFromCobaltProgram.Main();
 
             Console.Out.WriteLine("Enter any key to exit...");
             Console.In.ReadLine();

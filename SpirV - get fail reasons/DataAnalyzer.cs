@@ -23,15 +23,31 @@ namespace SpirV___get_fail_reasons
             get
             {
                 if (Program.environment == EnvironmentType.Silicon)
-                    return $"https://gtax-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
+                    return $"http://gtax-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
                 else if (Program.environment == EnvironmentType.Simulation)
-                    return $"https://gtax-presi-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
+                    return $"http://gtax-presi-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
                 else if (Program.environment == EnvironmentType.Emulation)
                     throw new Exception("Emulation not supported yet!");
                 else
                     return "";
             }
         }
+
+        private String JobSetLink
+        {
+            get
+            {
+                if (Program.environment == EnvironmentType.Silicon)
+                    return $"http://gtax-igk.intel.com/api/v1/jobsets/{JobsetID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
+                else if (Program.environment == EnvironmentType.Simulation)
+                    return $"http://gtax-presi-igk.intel.com/api/v1/jobsets/{JobsetID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
+                else if (Program.environment == EnvironmentType.Emulation)
+                    throw new Exception("Emulation not supported yet!");
+                else
+                    return "";
+            }
+        }
+
 
         private static DataAnalyzer m_oInstance = null;
         private static readonly object m_oPadLock = new object();
@@ -68,7 +84,8 @@ namespace SpirV___get_fail_reasons
 
         public void GetJobSetData()
         {
-            String resultsLink = $"http://gtax-igk.intel.com/api/v1/jobsets/{JobsetID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
+            //if Program.executionType == 
+            String resultsLink = JobSetLink;
             this.jsonResult = this.webClient.DownloadString(resultsLink);
 
             this.jobSet = JsonConvert.DeserializeObject<JobSet>(this.jsonResult);
@@ -82,6 +99,7 @@ namespace SpirV___get_fail_reasons
             this.jsonResult = this.webClient.DownloadString(ResultsLink);
 
             this.JobSetSession = JsonConvert.DeserializeObject<JobSetSessionData>(this.jsonResult);
+            this.Name = JobSetSessionID;
             this.jsonResult = "";
         }
 

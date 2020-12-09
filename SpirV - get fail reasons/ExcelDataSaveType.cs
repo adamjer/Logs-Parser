@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SpirV___get_fail_reasons
 {
-    public enum ExecutionType
+    public enum ExcelDataSaveType
     {
-        GetSpirV,
-        GetCorruptedImages,
-        GetFatalsFromCobalt
+        Basic,
+        Advanced,
+        Fatal,
     }
 }

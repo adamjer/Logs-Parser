@@ -57,9 +57,12 @@
     <Compile Include="Artifacts.cs" />
     <Compile Include="BusinessAttributes.cs" />
     <Compile Include="EnvironmentType.cs" />
+    <Compile Include="ExcelDataSaveType.cs" />
     <Compile Include="ExcelDataWriter.cs" />
     <Compile Include="ExecutionType.cs" />
+    <Compile Include="FatalsFromCobaltAnalyzer.cs" />
     <Compile Include="GetCorruptedImagesProgram.cs" />
+    <Compile Include="GetFatalsFromCobaltProgram.cs" />
     <Compile Include="ImagesFromDataAnalyzer.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobSet.cs" />

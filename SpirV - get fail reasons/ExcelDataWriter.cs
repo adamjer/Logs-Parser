@@ -83,6 +83,16 @@ namespace SpirV___get_fail_reasons
 
         public void Write()
         {
+            if (Program.excelSaveType == ExcelDataSaveType.Basic)
+                this.WriteBasic();
+            else if (Program.excelSaveType == ExcelDataSaveType.Advanced)
+                this.WriteAdvanced();
+            else if (Program.excelSaveType == ExcelDataSaveType.Fatal)
+                this.WriteFatal();
+        }
+
+        private void WriteBasic()
+        {
             int max = MaxFails();
             try
             {
@@ -135,13 +145,13 @@ namespace SpirV___get_fail_reasons
             }
             finally
             {
-                workBook.SaveAs(DataAnalyzer.JobsetID + ".xlsx");
+                workBook.SaveAs(DataAnalyzer.Name + ".xlsx");
                 workBook.Close();
                 excel.Quit();
             }
         }
 
-        public void WriteAdvanced()
+        private void WriteAdvanced()
         {
             int max = MaxFails();
             try
@@ -175,7 +185,7 @@ namespace SpirV___get_fail_reasons
                     for (int j = 0; j < Results[i].SubTask.Count; j++)
                     {
                         workSheets[0].Cells[row + j, 1] = Results[i].Name;
-                        workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row + j, 5], Results[i].GTAXlink, Type.Missing, "GTA-x", "GTA-X");
+                        workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row + j, 5], Results[i].GTAXlink, Type.Missing, Results[i].GTAXlink, "GTA-X");
                         if (Results[i].SubTask[j].Contains("passed"))
                         {
                             workSheets[0].Cells[row + j, 3] = "Passed";
@@ -210,7 +220,49 @@ namespace SpirV___get_fail_reasons
             }
             finally
             {
-                workBook.SaveAs(DataAnalyzer.JobsetID + ".xlsx");
+                workBook.SaveAs(DataAnalyzer.Name + "_advanced.xlsx");
+                workBook.Close();
+                excel.Quit();
+            }
+        }
+
+        private void WriteFatal()
+        {
+            try
+            {
+                excel = new Application();
+                workBook = null;
+                workSheets = new List<Worksheet>();
+
+                excel.Visible = true;
+                workBook = excel.Workbooks.Add();
+                workSheets.Add(workBook.ActiveSheet);
+
+                workSheets[0].Name = DataAnalyzer.Name;
+                workSheets[0].Cells[1, 1] = "Test Name";
+                workSheets[0].Cells[1, 2] = "GTA-X Link";
+
+                int row;
+                for (int i = 0; i < Results.Count; i++)
+                {
+                    row = i + 2;
+                    workSheets[0].Cells[row, 1] = Results[i].Name;
+                    workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, 2], Results[i].GTAXlink, Type.Missing, Results[i].GTAXlink, Results[i].GTAXlink);
+
+                    for(int j = 0; j < Results[i].SubTask.Count; j++)
+                    {
+                        workSheets[0].Cells[row, 3 + j] = Results[i].SubTask[j];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+                excel.Quit();
+            }
+            finally
+            {
+                workBook.SaveAs(DataAnalyzer.Name + "_fatal.xlsx");
                 workBook.Close();
                 excel.Quit();
             }

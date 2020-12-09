@@ -21,7 +21,12 @@ namespace SpirV___get_fail_reasons
 
         public void SetLink(String jobID, String ID)
         {
-            GTAXlink = $"https://gtax-igk.intel.com/#/jobs/{jobID}/task_results/{ID}";
+            if (Program.environment == EnvironmentType.Silicon)
+                GTAXlink = $"http://gtax-igk.intel.com/#/jobs/{jobID}/task_results/{ID}";
+            else if (Program.environment == EnvironmentType.Simulation)
+                GTAXlink = $"http://gtax-presi-igk.intel.com/#/jobs/{jobID}/task_results/{ID}";
+            else if (Program.environment == EnvironmentType.Emulation)
+                throw new Exception("Emulation not supported yet!");
         }
     }
 }

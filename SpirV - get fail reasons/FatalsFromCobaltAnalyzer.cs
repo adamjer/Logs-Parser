@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -13,12 +14,12 @@ namespace SpirV___get_fail_reasons
     class FatalsFromCobaltAnalyzer
     {
         private DataAnalyzer DataAnalyzer { get; set; }
-        public List<SpirVTask> Results { get; set; }
+        public ConcurrentBag<SpirVTask> Results { get; set; }
 
         public FatalsFromCobaltAnalyzer(DataAnalyzer dataAnalyzer)
         {
             this.DataAnalyzer = dataAnalyzer;
-            this.Results = new List<SpirVTask>();
+            this.Results = new ConcurrentBag<SpirVTask>();
         }
 
         private String GetJobsetHyperlink(JobSetSessionNS.JobSetSession jobSetSession)
@@ -55,57 +56,64 @@ namespace SpirV___get_fail_reasons
             return result.Remove(result.LastIndexOf("\r\n"), 1);
         }
 
-        private void ParseFatals(Result result, ref SpirVTask task, String[] logFilesToLookIn)
+        private String LoadTestLog()
+        {
+            String result = "";
+
+            result = File.ReadAllText(@"C:\Users\ajerecze\OneDrive - Intel Corporation\Documents\Visual Studio 2019\Projects\spirv---get-fail-reasons\SpirV - get fail reasons\Test\test.txt");
+
+            return result;
+        }
+
+        private List<String> ParseFatals(Result result, String logFileToLookIn)
         {
             String hyperlink, log;
             String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
+            List<String> parsedLogs = new List<String>();
 
             foreach (String taskLog in result.Artifacts.TaskLogs)
             {
-
-                bool containsLogFiles = false;
-                foreach (String logFile in logFilesToLookIn)
-                {
-                    if (logFile == taskLog)
-                    {
-                        containsLogFiles = true;
-                        break;
-                    }
-                }
-
-                if (containsLogFiles)
+                if (taskLog == logFileToLookIn)
                 {
                     hyperlink = $"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
 
                     try
                     {
-                        log = this.DataAnalyzer.webClient.DownloadString(hyperlink);
+                        log = this.DataAnalyzer.DownloadAsync(hyperlink);
+                        //log = LoadTestLog();
                         Match firstHeader = null, secondHeader = null;
                         while (true)
                         {
                             if (firstHeader == null && secondHeader == null)
                             {
-                                firstHeader = Regex.Match(log, @"\* FATAL \*");
-                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\* END FATAL \*");
+                                firstHeader = Regex.Match(log, @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* \* FATAL \* \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
+                                if (!firstHeader.Success)
+                                    break;
+                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* END FATAL \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
+                                if (!secondHeader.Success)
+                                    break;
                             }
                             else
                             {
                                 firstHeader = firstHeader.NextMatch();
                                 if (!firstHeader.Success)
                                     break;
-                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\* END FATAL \*");
+                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* END FATAL \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
                                 if (!secondHeader.Success)
                                     break;
                             }
 
                             if (firstHeader.Index > 0 && secondHeader.Index > 0)
                             {
-                                String fatal = ReadMatch(log, firstHeader, secondHeader);
+                                String fatal = "File: " + taskLog + Environment.NewLine + ReadMatch(log, firstHeader, secondHeader);
                                 if (fatal != String.Empty)
-                                    task.SubTask.Add(@"***** **** *** ** " + fatal + @"* *** **** *****");
+                                {
+                                    if (!parsedLogs.Contains(fatal))
+                                        parsedLogs.Add(fatal);
+                                }
                             }
                         }
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -114,11 +122,67 @@ namespace SpirV___get_fail_reasons
                     break;
                 }
             }
+            return parsedLogs;
         }
 
-        private void Parse(Result result, ref SpirVTask task, String[] logFilesToLookIn, String[] keyWords, String[] matchers)
+        private List<String> Parse(Result result, String logFileToLookIn, String[] keyWords)
         {
+            String hyperlink, log;
+            String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
+            List<String> parsedLogs = new List<String>();
 
+            foreach (String taskLog in result.Artifacts.TaskLogs)
+            {
+                if (taskLog == logFileToLookIn)
+                {
+                    hyperlink = $"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
+
+                    try
+                    {
+                        //log = this.DataAnalyzer.webClient.DownloadString(hyperlink);
+                        log = this.DataAnalyzer.DownloadAsync(hyperlink);
+                        //log = LoadTestLog();
+                        Match firstHeader = null, secondHeader = null;
+                        while (true)
+                        {
+                            if (firstHeader == null && secondHeader == null)
+                            {
+                                firstHeader = Regex.Match(log, Regex.Escape(keyWords[0]));
+                                if (!firstHeader.Success)
+                                    break;
+                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), Regex.Escape(keyWords[1]));
+                                if (!secondHeader.Success)
+                                    break;
+                            }
+                            else
+                            {
+                                firstHeader = firstHeader.NextMatch();
+                                if (!firstHeader.Success)
+                                    break;
+                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), Regex.Escape(keyWords[1]));
+                                if (!secondHeader.Success)
+                                    break;
+                            }
+
+                            if (firstHeader.Index > 0 && secondHeader.Index > 0)
+                            {
+                                String parsedLog = "File: " + taskLog + Environment.NewLine + ReadMatch(log, firstHeader, secondHeader);
+                                if (parsedLog != String.Empty)
+                                {
+                                    if (!parsedLogs.Contains(parsedLog))
+                                        parsedLogs.Add(parsedLog);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Out.WriteLine(ex.Message + " " + hyperlink);
+                    }
+                    break;
+                }
+            }
+            return parsedLogs;
         }
 
         public void Analyze()
@@ -136,26 +200,83 @@ namespace SpirV___get_fail_reasons
 
                     foreach (Job job in jobSet.Jobs)
                     {
-                        foreach (Result result in job.Results)
-                        {
-                            if (result.PhaseName == "tests" && result.Status.ToLower() == "failed")
+                        Parallel.ForEach(job.Results, result =>
                             {
-                                if (result.Artifacts != null)
+                                if (result.PhaseName == "tests")
                                 {
-                                    SpirVTask task = new SpirVTask();
-                                    task.Name = result.BusinessAttributes.ItemName;
-                                    task.SetLink(result.JobID, result.ID);
-                                    String[] logFilesToLookin = { "cobalt2.log", "cobalt2-tail.log" };
+                                    if (result.Artifacts != null)
+                                    {
+                                        SpirVTask task = new SpirVTask();
+                                        List<String> parsedLogs = new List<string>();
+                                        task.Name = result.BusinessAttributes.ItemName;
+                                        task.Status = result.GTAStatus;
+                                        task.SetLink(result.JobID, result.ID);
+                                        String[] logFilesToLookIn = { "cobalt2-tail.log", "cobalt2.log" };
 
-                                    ParseFatals(result, ref task, logFilesToLookin);
+                                        parsedLogs = ParseFatals(result, logFilesToLookIn[0]);
+                                        if (parsedLogs.Count == 0)
+                                            parsedLogs = ParseFatals(result, logFilesToLookIn[1]);
+                                        task.SubTask.AddRange(parsedLogs);
 
-                                    //Parse
 
-                                    if (task.SubTask.Count > 0)
-                                        Results.Add(task);
+                                        String[] keywords = new String[] { @"||  || ||\\   ////",
+                                        @"For more details refer to HDC Blue Screen dump above." };
+                                        parsedLogs = Parse(result, logFilesToLookIn[0], keywords);
+                                        if (parsedLogs.Count == 0)
+                                            parsedLogs = Parse(result, logFilesToLookIn[1], keywords);
+                                        task.SubTask.AddRange(parsedLogs);
+
+                                        keywords = new String[] { @"*********************** WARNING *************************",
+                                        @"*********************************************************" };
+                                        parsedLogs = Parse(result, logFilesToLookIn[0], keywords);
+                                        if (parsedLogs.Count == 0)
+                                            parsedLogs = Parse(result, logFilesToLookIn[1], keywords);
+                                        task.SubTask.AddRange(parsedLogs);
+
+                                        if (task.SubTask.Count > 0)
+                                            Results.Add(task);
+                                    }
                                 }
-                            }
-                        }
+                            });
+
+                        //foreach (Result result in job.Results)
+                        //{
+                        //    if (result.PhaseName == "tests")
+                        //    {
+                        //        if (result.Artifacts != null)
+                        //        {
+                        //            SpirVTask task = new SpirVTask();
+                        //            task.Name = result.BusinessAttributes.ItemName;
+                        //            task.Status = result.GTAStatus;
+                        //            task.SetLink(result.JobID, result.ID);
+                        //            String[] logFilesToLookIn = { "cobalt2-tail.log", "cobalt2.log" };
+
+                        //            Int32 counter = task.SubTask.Count;
+                        //            ParseFatals(result, ref task, logFilesToLookIn[0]);
+                        //            if (task.SubTask.Count == counter)
+                        //            {
+                        //                ParseFatals(result, ref task, logFilesToLookIn[1]);
+                        //            }
+
+                        //            counter = task.SubTask.Count;
+                        //            String[] keywords = new String[] { @"||  || ||\\   ////",
+                        //                @"For more details refer to HDC Blue Screen dump above." };
+                        //            Parse(result, ref task, logFilesToLookIn[0], keywords);
+                        //            if (task.SubTask.Count == counter)
+                        //                Parse(result, ref task, logFilesToLookIn[1], keywords);
+
+                        //            counter = task.SubTask.Count;
+                        //            keywords = new String[] { "*********************** WARNING *************************",
+                        //                "*********************************************************" };
+                        //            Parse(result, ref task, logFilesToLookIn[0], keywords);
+                        //            if (task.SubTask.Count == counter)
+                        //                Parse(result, ref task, logFilesToLookIn[1], keywords);
+
+                        //            if (task.SubTask.Count > 0)
+                        //                Results.Add(task);
+                        //        }
+                        //    }
+                        //}
                     }
                 }
             }

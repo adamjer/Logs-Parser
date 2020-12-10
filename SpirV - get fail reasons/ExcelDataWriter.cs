@@ -239,19 +239,22 @@ namespace SpirV___get_fail_reasons
                 workSheets.Add(workBook.ActiveSheet);
 
                 workSheets[0].Name = DataAnalyzer.Name;
-                workSheets[0].Cells[1, 1] = "Test Name";
-                workSheets[0].Cells[1, 2] = "GTA-X Link";
+                const int testNameColumn = 1, statusColumn = 2, gtaxLinkColumn = 3;
+                workSheets[0].Cells[1, testNameColumn] = "Test Name";
+                workSheets[0].Cells[1, statusColumn] = "Status";
+                workSheets[0].Cells[1, gtaxLinkColumn] = "GTA-X Link";
 
                 int row;
                 for (int i = 0; i < Results.Count; i++)
                 {
                     row = i + 2;
-                    workSheets[0].Cells[row, 1] = Results[i].Name;
-                    workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, 2], Results[i].GTAXlink, Type.Missing, Results[i].GTAXlink, Results[i].GTAXlink);
+                    workSheets[0].Cells[row, testNameColumn] = Results[i].Name;
+                    workSheets[0].Cells[row, statusColumn] = Results[i].Status;
+                    workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, gtaxLinkColumn], Results[i].GTAXlink, Type.Missing, Results[i].GTAXlink, Results[i].GTAXlink);
 
                     for(int j = 0; j < Results[i].SubTask.Count; j++)
                     {
-                        workSheets[0].Cells[row, 3 + j] = Results[i].SubTask[j];
+                        workSheets[0].Cells[row, gtaxLinkColumn + j + 1] = Results[i].SubTask[j];
                     }
                 }
             }

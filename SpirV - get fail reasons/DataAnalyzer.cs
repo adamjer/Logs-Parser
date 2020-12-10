@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace SpirV___get_fail_reasons
         public SortedSet<Result> Results { get; set; }
         public String Name { get; set; }
         public JobSetSessionData JobSetSession { get; set; }
+        private String Login { get; set; }
+        private String Password { get; set; }
 
         private String ResultsLink
         {
@@ -75,11 +78,27 @@ namespace SpirV___get_fail_reasons
         public void InitWebClient()
         {
             Console.Write("Enter user name: ");
-            String user = Console.ReadLine();
+            Login = Console.ReadLine();
             Console.Write("and password: ");
-            String password = this.ReadPassword();
+            Password = this.ReadPassword();
 
-            this.webClient.Credentials = new NetworkCredential(user, password);
+            this.webClient.Credentials = new NetworkCredential(Login, Password);
+        }
+
+        public String Download(String uri)
+        {
+            return this.webClient.DownloadString(uri);
+        }
+
+        public String DownloadAsync(String uri)
+        {
+            WebClient temp = new WebClient();
+            temp.Credentials = new NetworkCredential(Login, Password);
+            using (temp)
+            {
+                var result = temp.DownloadString(uri);
+                return result;
+            }
         }
 
         public void GetJobSetData()

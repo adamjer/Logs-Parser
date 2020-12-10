@@ -25,7 +25,7 @@ namespace SpirV___get_fail_reasons
                     FatalsFromCobaltAnalyzer analyzer = new FatalsFromCobaltAnalyzer(DataAnalyzer.Instance);
                     analyzer.Analyze();
 
-                    ExcelDataWriter excelDataWriter = new ExcelDataWriter(analyzer.Results, DataAnalyzer.Instance);
+                    ExcelDataWriter excelDataWriter = new ExcelDataWriter(analyzer.Results.ToList(), DataAnalyzer.Instance);
                     excelDataWriter.Write();
                 }
             }

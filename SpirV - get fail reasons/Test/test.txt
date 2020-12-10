@@ -1,0 +1,248 @@
+﻿jasdlkgfjasdlkfjasdlfj
+jasdklfjasldkfja
+sdfjlasdjfasdlfj
+asd
+jfasdfkjlasdfjasd
+fjasd
+fjsdalfkjsdaf
+klsdaj
+jsda
+fsdjflasdjf
+l;asdjasd
+jf
+al;sdjf
+asdlfjasdlfjasd
+flkdzgnh'aojh
+adetheartport
+hj
+dfjhg
+aderfhjg
+dfrjoh]pdfjh
+dfshj
+sdfh
+dfjho
+adfh
+oadjhb
+cflxo
+hnjdf
+chjofgdojfthi
+
+
+||  || ||\\   ////   
+||==|| || || ||      BLUE SCREEN
+||  || ||//   \\\\   
+===============================================================================
+Non-pipeline state: 
+==================
+	control: 0x6
+	CSR BaseAddress: 0
+	General State Base Address: 0xffff800000000000
+	General State Size: 0xfffff000
+	Hardware Bit Enable: 0
+	Instruction Base Address: 0xffff800000000000
+	A64 Messages Disabled: No
+	CSR Forced Non Coherent: Yes
+	Save/Restore Forced Non Coherent: Yes
+	Disable Merging all messages sent to L3: No
+	Disable Merging SLM Byte Scattered messages: No
+	Disable Merging global memory Byte Scattered messages: No
+	Disable Merging Typed Messages: No
+	TRTT Enabled: No
+	Tiled Resource Virtual Address [47:44]: 0
+
+Message Information: 
+====================
+	Destination Unit Id: 0xd (CRE)
+	Response Length: 0x8
+	Destination Register: 0x8
+	Header Present: No
+	A64 Enable: No
+	Has a Potential End of Thread: No
+	Has CSR: No
+	Raw Message Descriptor: 0xf502
+	Base Address: 0xb80400060000
+	Element Size: 0x10
+	Data Size: 0x4
+	Has End Of Thread: No
+	Fixed Function ID: 0x7
+	Fixed Function Thread ID: 0
+	Execution Unit ID: 0
+	Thread Id: 0
+	Binding Table Pointer: 0
+	Binding Table Index: 0xfc
+	Bindless Surface State Offset: 0x1
+	Channel Enables: 0xffffffff
+	Byte Enables: 0xf
+	Surface target: Yes
+	Has State Read: Yes
+	Has SLM Access: No
+	L3 destination: 0
+Debug Keys: 
+============
+	Command Set Id: 0xcc9f
+	Unit Id: 0x7
+	pThread Count: 0x3405c0
+	Thread Count: 0
+	Message Id: 0
+	Message Sequence Number: 0
+	Data Sequence Number: 0
+	Request Sequence Number: 0x1
+	Fixed Function Data Sequence Number: 0
+	Slice ID: 0
+	DualSubSlice ID: 0
+	SubSlice ID: 0
+
+Page Fault Details: 
+===================
+	Access Type: 0x1
+	Has Commit Mask: Yes
+	Has Replay: No
+	Message Descriptor Index: 0
+	Commit Mask In: 0
+	MessageType: 0x25 , UNKNOWN
+
+
+SURFACE DEBUG INFORMATION
+===========================
+	Cmd3DMapSurfaceType: 2D
+	isSurfaceArray: 0
+	eSurfaceFormatID: R8G8B8A8_UNORM
+	vertAlignment: 0x1
+	horzAlignment: 0x1
+	CmdSurfaceFormat tileMode: 0x1
+	verticalStride: 0
+	verticalOffset: 0
+	CmdMediaBoundPixMode boundaryMode: 0
+	baseAddress: 0xb80400060000
+	qPitch: 0
+	height: 0x20
+	width: 0x20
+	depth: 0x1
+	pitch: 0x200
+	minArrayElement: 0
+	nEntries: 0
+	rtvExtent: 0x1
+	nMSamples: 0
+	xOffset: 0
+	yOffset: 0
+	control: 0x6
+	coherencyType: 0
+	minLOD: 0
+	mipCount: 0x1
+	appendCounterEnable: 0
+	appendCounterAddress: 0
+	shaderChannelSelect: RGBA
+===================================
+
+Unexpected response length for typed surface read message (Debug Key: 0000cc9f 7 3405c0 000000 00000). 
+ For more details refer to HDC Blue Screen dump above.
+Contact the test owner for any test issues or BSpec violations.
+For any debug assistance from Fulsim team, include the output "DcRtiTrace.txt" file in any communication with Fulsim HDC team.
+NOTE: DcRtiTrace.txt file is dumped only in pipe mode at present.
+
+dsja,kfjdasf
+adsfjadskljf
+asdfjdas
+l;fkjdsa
+lfjadslfjsda
+fjasd
+fjasdl
+fjdasf
+asdjf
+asdjf
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+URB-0 Gfx Address : 0x4cd40
+[genxp.mb.elg.logger info Out 1] [14:33:03.6119] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109016 ]
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+URB-0 Gfx Address : 0x4cd40
+[genxp.mb.elg.logger info Out 1] [14:33:03.6119] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109020 ]
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+URB-0 Gfx Address : 0x4cdc0
+[genxp.mb.elg.logger info Out 1] [14:33:03.6120] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109020 ]
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+URB-0 Gfx Address : 0x4cdc0
+[genxp.mb.elg.logger info Out 1] [14:33:03.6120] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109024 ]
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+URB-0 Gfx Address : 0x4ce40
+[genxp.mb.elg.logger info Out 1] [14:33:03.6121] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109024 ]
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+URB-0 Gfx Address : 0x4ce40
+[genxp.mb.elg.logger info Out 1] [14:33:03.6122] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109028 ]
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+URB-0 Gfx Address : 0x4cec0
+[genxp.mb.elg.logger info Out 1] [14:33:03.6122] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109028 ]
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request
+*********************************************************
+
+*********************** WARNING *************************
+Attempting to Read from a URB location which has not seen
+any Writes before servicing the incoming Read Request gfasdgjsdklfasd
+*********************************************************
+
+
+fakjsdhfklasdfh
+sdahfljsdafhkasdlfhasd
+fh
+asdfh
+sdafhasdkj
+fhsad
+fhasd'
+fhasd
+fh
+asdfhasd
+fhjasdkfhasdfhasdfhjasd
+fh
+asdj
+sdf
+asdhfasdkjfhasd
+
+File: cobalt2.log
+***** **** *** ** * FATAL * ** *** **** *****
+GetDependencyType>Cobalt internal error detected. Please contact EU team.
+Wrong SWSB info: 64
+***** **** *** ** END FATAL ** *** **** *****
+
+File: cobalt2.log
+***** **** *** ** * FATAL * ** *** **** *****
+GetDependencyType>Cobalt internal error detected. Please contact EU team.
+Wrong SWSB info: 64
+***** **** *** ** END FATAL ** *** **** *****
+
+File: cobalt2.log
+***** **** *** ** * FATAL * ** *** **** *****
+GetDependencyType>Cobalt internal error detected. Please contact EU team.
+Wrong SWSB info: 64
+***** **** *** ** END FATAL ** *** **** *****
+
+File: cobalt2-tail.log
+***** **** *** ** * FATAL * ** *** **** *****
+ExtractDWordParameter>Invalid message length for the intended Sampler message.
+***** **** *** ** END FATAL ** *** **** *****
+
+File: cobalt2-tail.log
+***** **** *** ** * FATAL * ** *** **** *****
+ExtractDWordParameter>Invalid message length for the intended Sampler message.
+***** **** *** ** END FATAL ** *** **** *****

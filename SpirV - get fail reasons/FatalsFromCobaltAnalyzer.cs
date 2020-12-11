@@ -65,125 +65,101 @@ namespace SpirV___get_fail_reasons
             return result;
         }
 
-        private List<String> ParseFatals(Result result, String logFileToLookIn)
+        private List<String> ParseFatals(Result result, String log, String taskLog)
         {
-            String hyperlink, log;
-            String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
             List<String> parsedLogs = new List<String>();
 
-            foreach (String taskLog in result.Artifacts.TaskLogs)
+            try
             {
-                if (taskLog == logFileToLookIn)
+                //log = LoadTestLog();
+                Match firstHeader = null, secondHeader = null;
+                while (true)
                 {
-                    hyperlink = $"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
-
-                    try
+                    if (firstHeader == null && secondHeader == null)
                     {
-                        log = this.DataAnalyzer.DownloadAsync(hyperlink);
-                        //log = LoadTestLog();
-                        Match firstHeader = null, secondHeader = null;
-                        while (true)
+                        firstHeader = Regex.Match(log, @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* \* FATAL \* \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
+                        if (!firstHeader.Success)
+                            break;
+                        secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* END FATAL \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
+                        if (!secondHeader.Success)
+                            break;
+                    }
+                    else
+                    {
+                        firstHeader = firstHeader.NextMatch();
+                        if (!firstHeader.Success)
+                            break;
+                        secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* END FATAL \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
+                        if (!secondHeader.Success)
+                            break;
+                    }
+
+                    if (firstHeader.Index > 0 && secondHeader.Index > 0)
+                    {
+                        String fatal = "File: " + taskLog + Environment.NewLine + ReadMatch(log, firstHeader, secondHeader);
+                        if (fatal != String.Empty)
                         {
-                            if (firstHeader == null && secondHeader == null)
-                            {
-                                firstHeader = Regex.Match(log, @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* \* FATAL \* \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
-                                if (!firstHeader.Success)
-                                    break;
-                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* END FATAL \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
-                                if (!secondHeader.Success)
-                                    break;
-                            }
-                            else
-                            {
-                                firstHeader = firstHeader.NextMatch();
-                                if (!firstHeader.Success)
-                                    break;
-                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), @"\*\*\*\*\* \*\*\*\* \*\*\* \*\* END FATAL \*\* \*\*\* \*\*\*\* \*\*\*\*\*");
-                                if (!secondHeader.Success)
-                                    break;
-                            }
-
-                            if (firstHeader.Index > 0 && secondHeader.Index > 0)
-                            {
-                                String fatal = "File: " + taskLog + Environment.NewLine + ReadMatch(log, firstHeader, secondHeader);
-                                if (fatal != String.Empty)
-                                {
-                                    if (!parsedLogs.Contains(fatal))
-                                        parsedLogs.Add(fatal);
-                                }
-                            }
+                            if (!parsedLogs.Contains(fatal))
+                                parsedLogs.Add(fatal);
                         }
-
                     }
-                    catch (Exception ex)
-                    {
-                        Console.Out.WriteLine(ex.Message + " " + hyperlink);
-                    }
-                    break;
                 }
+
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine("ParseFatals:" + ex.Message);
+            }            
+            return parsedLogs;
+        }
+
+        private List<String> Parse(Result result, String log, String[] keyWords, String taskLog)
+        {
+            List<String> parsedLogs = new List<String>();
+            try
+            {
+                //log = LoadTestLog();
+                Match firstHeader = null, secondHeader = null;
+                while (true)
+                {
+                    if (firstHeader == null && secondHeader == null)
+                    {
+                        firstHeader = Regex.Match(log, Regex.Escape(keyWords[0]));
+                        if (!firstHeader.Success)
+                            break;
+                        secondHeader = Regex.Match(log.Substring(firstHeader.Index), Regex.Escape(keyWords[1]));
+                        if (!secondHeader.Success)
+                            break;
+                    }
+                    else
+                    {
+                        firstHeader = firstHeader.NextMatch();
+                        if (!firstHeader.Success)
+                            break;
+                        secondHeader = Regex.Match(log.Substring(firstHeader.Index), Regex.Escape(keyWords[1]));
+                        if (!secondHeader.Success)
+                            break;
+                    }
+
+                    if (firstHeader.Index > 0 && secondHeader.Index > 0)
+                    {
+                        String parsedLog = "File: " + taskLog + Environment.NewLine + ReadMatch(log, firstHeader, secondHeader);
+                        if (parsedLog != String.Empty)
+                        {
+                            if (!parsedLogs.Contains(parsedLog))
+                                parsedLogs.Add(parsedLog);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine("Parse(): " + ex.Message);
             }
             return parsedLogs;
         }
 
-        private List<String> Parse(Result result, String logFileToLookIn, String[] keyWords)
-        {
-            String hyperlink, log;
-            String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
-            List<String> parsedLogs = new List<String>();
 
-            foreach (String taskLog in result.Artifacts.TaskLogs)
-            {
-                if (taskLog == logFileToLookIn)
-                {
-                    hyperlink = $"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
-
-                    try
-                    {
-                        //log = this.DataAnalyzer.webClient.DownloadString(hyperlink);
-                        log = this.DataAnalyzer.DownloadAsync(hyperlink);
-                        //log = LoadTestLog();
-                        Match firstHeader = null, secondHeader = null;
-                        while (true)
-                        {
-                            if (firstHeader == null && secondHeader == null)
-                            {
-                                firstHeader = Regex.Match(log, Regex.Escape(keyWords[0]));
-                                if (!firstHeader.Success)
-                                    break;
-                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), Regex.Escape(keyWords[1]));
-                                if (!secondHeader.Success)
-                                    break;
-                            }
-                            else
-                            {
-                                firstHeader = firstHeader.NextMatch();
-                                if (!firstHeader.Success)
-                                    break;
-                                secondHeader = Regex.Match(log.Substring(firstHeader.Index), Regex.Escape(keyWords[1]));
-                                if (!secondHeader.Success)
-                                    break;
-                            }
-
-                            if (firstHeader.Index > 0 && secondHeader.Index > 0)
-                            {
-                                String parsedLog = "File: " + taskLog + Environment.NewLine + ReadMatch(log, firstHeader, secondHeader);
-                                if (parsedLog != String.Empty)
-                                {
-                                    if (!parsedLogs.Contains(parsedLog))
-                                        parsedLogs.Add(parsedLog);
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.Out.WriteLine(ex.Message + " " + hyperlink);
-                    }
-                    break;
-                }
-            }
-            return parsedLogs;
-        }
 
         public void Analyze()
         {
@@ -211,26 +187,37 @@ namespace SpirV___get_fail_reasons
                                         task.Name = result.BusinessAttributes.ItemName;
                                         task.Status = result.GTAStatus;
                                         task.SetLink(result.JobID, result.ID);
+
+                                        //check cobalt2-tail.log and cobalt2.log section
                                         String[] logFilesToLookIn = { "cobalt2-tail.log", "cobalt2.log" };
+                                        String log = "";
+                                        String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
 
-                                        parsedLogs = ParseFatals(result, logFilesToLookIn[0]);
-                                        if (parsedLogs.Count == 0)
-                                            parsedLogs = ParseFatals(result, logFilesToLookIn[1]);
+                                        //9Console.Out.WriteLine("Test: " + task.Name);
+                                        try
+                                        {
+                                            if (result.Artifacts.TaskLogs.Contains(logFilesToLookIn[0]))
+                                                log = this.DataAnalyzer.DownloadAsync($"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{logFilesToLookIn[0]}");
+                                            else if (result.Artifacts.TaskLogs.Contains(logFilesToLookIn[1]))
+                                                log = this.DataAnalyzer.DownloadAsync($"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{logFilesToLookIn[1]}");
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.Out.WriteLine("Download log: " + ex.Message);
+                                        }
+
+
+                                        parsedLogs = ParseFatals(result, log, "cobalt2.log");
                                         task.SubTask.AddRange(parsedLogs);
-
 
                                         String[] keywords = new String[] { @"||  || ||\\   ////",
                                         @"For more details refer to HDC Blue Screen dump above." };
-                                        parsedLogs = Parse(result, logFilesToLookIn[0], keywords);
-                                        if (parsedLogs.Count == 0)
-                                            parsedLogs = Parse(result, logFilesToLookIn[1], keywords);
+                                        parsedLogs = Parse(result, log, keywords, "cobalt2.log");
                                         task.SubTask.AddRange(parsedLogs);
 
                                         keywords = new String[] { @"*********************** WARNING *************************",
                                         @"*********************************************************" };
-                                        parsedLogs = Parse(result, logFilesToLookIn[0], keywords);
-                                        if (parsedLogs.Count == 0)
-                                            parsedLogs = Parse(result, logFilesToLookIn[1], keywords);
+                                        parsedLogs = Parse(result, log, keywords, "cobalt2.log");
                                         task.SubTask.AddRange(parsedLogs);
 
                                         if (task.SubTask.Count > 0)

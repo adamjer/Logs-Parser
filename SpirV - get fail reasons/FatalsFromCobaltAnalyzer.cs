@@ -40,6 +40,9 @@ namespace SpirV___get_fail_reasons
             StringReader reader = new StringReader(log.Substring(firstHeader.Index, secondHeader.Index + secondHeader.Length));
             StringBuilder builder = new StringBuilder();
 
+            if (secondHeader.Value == "\n")
+                return log.Substring(firstHeader.Index, secondHeader.Index + secondHeader.Length);
+
             while (!(line = reader.ReadLine()).Contains(secondHeader.Value))
             {
                 if (line == null)
@@ -109,7 +112,7 @@ namespace SpirV___get_fail_reasons
             catch (Exception ex)
             {
                 Console.Out.WriteLine("ParseFatals:" + ex.Message);
-            }            
+            }
             return parsedLogs;
         }
 
@@ -159,6 +162,17 @@ namespace SpirV___get_fail_reasons
             return parsedLogs;
         }
 
+        private List<String> ParseExceptionLastLines(String log, String sentence, int length, String taskLog)
+        {
+            List<String> parsedLogs = new List<String>();
+            if (log.Contains(sentence))
+            {
+                parsedLogs.Add("File: " + taskLog + Environment.NewLine + log.Substring(log.Length - length));
+            }
+
+            return parsedLogs;
+        }
+
 
 
         public void Analyze()
@@ -168,7 +182,7 @@ namespace SpirV___get_fail_reasons
             foreach (JobSetSessionNS.JobSetSession jobSetSession in DataAnalyzer.JobSetSession.JobSetSessions)
             {
                 hyperlink = GetJobsetHyperlink(jobSetSession);
-                if (jobSetSession.Status.ToLower() == "completed" && jobSetSession.BusinessAttributes.Planning.Attributes.Environment.ToLower() == "simulation")
+                if (true)
                 {
                     jsonResult = this.DataAnalyzer.webClient.DownloadString(hyperlink);
                     JobSet jobSet = JsonConvert.DeserializeObject<JobSet>(jsonResult);
@@ -188,40 +202,148 @@ namespace SpirV___get_fail_reasons
                                         task.Status = result.GTAStatus;
                                         task.SetLink(result.JobID, result.ID);
 
-                                        //check cobalt2-tail.log and cobalt2.log section
-                                        String[] logFilesToLookIn = { "cobalt2-tail.log", "cobalt2.log" };
-                                        String log = "";
+                                        String log = "", downloadHyperLink = "";
                                         String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
 
-                                        //9Console.Out.WriteLine("Test: " + task.Name);
-                                        try
+                                        var logNames = result.Artifacts.TaskLogs.Where(l => l.ToLower().Contains("cobalt2")).Where(l => !l.Contains(".gz"));
+                                        if (logNames.Contains("Cobalt2-tail.log"))
                                         {
-                                            if (result.Artifacts.TaskLogs.Contains(logFilesToLookIn[0]))
-                                                log = this.DataAnalyzer.DownloadAsync($"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{logFilesToLookIn[0]}");
-                                            else if (result.Artifacts.TaskLogs.Contains(logFilesToLookIn[1]))
-                                                log = this.DataAnalyzer.DownloadAsync($"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{logFilesToLookIn[1]}");
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Console.Out.WriteLine("Download log: " + ex.Message);
+                                            logNames = logNames.Where(l => !l.Contains("Cobalt2.log") && !l.Contains("Cobalt2-head.log"));
                                         }
 
+                                        foreach (string logName in logNames)
+                                        {
+                                            String[] keywords;
+                                            try
+                                            {
+                                                downloadHyperLink = $"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{logName}";
+                                                log = this.DataAnalyzer.DownloadAsync(downloadHyperLink);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                                log = this.DataAnalyzer.DownloadAsync(downloadHyperLink);
+                                            }
 
-                                        parsedLogs = ParseFatals(result, log, "cobalt2.log");
-                                        task.SubTask.AddRange(parsedLogs);
+                                            try
+                                            {
+                                                parsedLogs = ParseFatals(result, log, "Cobalt2.log");
+                                                task.SubTask.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
 
-                                        String[] keywords = new String[] { @"||  || ||\\   ////",
+                                            try
+                                            {
+                                                keywords = new String[] { @"||  || ||\\   ////",
                                         @"For more details refer to HDC Blue Screen dump above." };
-                                        parsedLogs = Parse(result, log, keywords, "cobalt2.log");
-                                        task.SubTask.AddRange(parsedLogs);
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.SubTask.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
 
-                                        keywords = new String[] { @"*********************** WARNING *************************",
+                                            try
+                                            {
+                                                keywords = new String[] { @"*********************** WARNING *************************",
                                         @"*********************************************************" };
-                                        parsedLogs = Parse(result, log, keywords, "cobalt2.log");
-                                        task.SubTask.AddRange(parsedLogs);
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.SubTask.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
 
-                                        if (task.SubTask.Count > 0)
-                                            Results.Add(task);
+                                            try
+                                            {
+                                                keywords = new String[] { @"FATAL: ASSERT", "Fail" };
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.SubTask.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                keywords = new String[] { @"WARNING:", "\n" };
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.SubTask.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                keywords = new String[] { @"ERROR:", "\n" };
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.SubTask.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                keywords = new String[] { @"INFO:", "\n" };
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.SubTask.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                if (task.SubTask.Count == 0)
+                                                    task.SubTask.AddRange(ParseExceptionLastLines(log, "failed with exception, what():", 2000, "Cobalt2.log"));
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                if (task.SubTask.Count > 0)
+                                                {
+                                                    task.SubTask = task.SubTask.Distinct().ToList();
+                                                    Results.Add(task);
+                                                    Console.Out.WriteLine("Results count: " + Results.Count);
+                                                }
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                            }
+                                        }
                                     }
                                 }
                             });
@@ -265,6 +387,10 @@ namespace SpirV___get_fail_reasons
                         //    }
                         //}
                     }
+                }
+                else
+                {
+                    Console.Out.WriteLine("TestSession not completed yet!");
                 }
             }
         }

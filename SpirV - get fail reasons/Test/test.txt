@@ -1,248 +1,500 @@
-﻿jasdlkgfjasdlkfjasdlfj
-jasdklfjasldkfja
-sdfjlasdjfasdlfj
-asd
-jfasdfkjlasdfjasd
-fjasd
-fjsdalfkjsdaf
-klsdaj
-jsda
-fsdjflasdjf
-l;asdjasd
-jf
-al;sdjf
-asdlfjasdlfjasd
-flkdzgnh'aojh
-adetheartport
-hj
-dfjhg
-aderfhjg
-dfrjoh]pdfjh
-dfshj
-sdfh
-dfjho
-adfh
-oadjhb
-cflxo
-hnjdf
-chjofgdojfthi
+﻿Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48856506} [16:51:21.7287] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:21.7435] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48862353} [16:51:22.9043] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:23.5458] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48867355} [16:51:23.5465] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:23.5549] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48873202} [16:51:23.9040] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:24.1823] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48878204} [16:51:24.1830] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:24.1909] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48884051} [16:51:24.2678] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:24.2853] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48889053} [16:51:24.2862] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:24.2961] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48894900} [16:51:25.4496] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:25.8186] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48899902} [16:51:25.8194] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:25.8282] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48905749} [16:51:26.1768] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:26.3873] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48910751} [16:51:26.3881] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:26.3962] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48916598} [16:51:26.7223] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:27.0002] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48921600} [16:51:27.0011] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:27.0104] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48927447} [16:51:27.3587] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:27.6367] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48932449} [16:51:27.6374] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:27.6449] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48938296} [16:51:27.7222] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:27.7372] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48943298} [16:51:27.7379] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:27.7452] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48949145} [16:51:27.9949] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:28.1818] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48954147} [16:51:28.1825] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:28.1905] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48959994} [16:51:28.5404] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:28.8185] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48964996} [16:51:28.8192] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:28.8268] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48970843} [16:51:28.9041] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:28.9211] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48975845} [16:51:28.9219] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:28.9302] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48981692} [16:51:29.0859] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:29.3644] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48986694} [16:51:29.3655] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:29.3762] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 48992541} [16:51:29.7223] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:30.0005] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 48997543} [16:51:30.0012] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:30.0092] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49003390} [16:51:30.3586] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:30.6370] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49008392} [16:51:30.6377] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:30.6456] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49014239} [16:51:30.9041] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:31.1832] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49019241} [16:51:31.1840] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:31.1912] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49025088} [16:51:31.2066] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:34.3648] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49030090} [16:51:34.3658] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:34.3745] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49035937} [16:51:34.3880] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:37.1974] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49040939} [16:51:37.1983] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:37.2077] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49046786} [16:51:37.3587] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:37.6381] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49051788} [16:51:37.6389] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:37.6473] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49057635} [16:51:37.9959] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:38.2741] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49062637} [16:51:38.2748] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:38.2829] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49068484} [16:51:38.5634] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:38.8193] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49073486} [16:51:38.8200] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:38.8283] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49079343} [16:51:39.1777] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:39.4562] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49084345} [16:51:39.4571] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:39.4665] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49090206} [16:51:39.8141] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:40.0921] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49095208} [16:51:40.0929] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:40.1003] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49101069} [16:51:40.4503] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:40.6397] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49106071} [16:51:40.6404] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:40.6484] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49111932} [16:51:40.8140] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:41.0924] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49116934} [16:51:41.0932] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:41.1014] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49122795} [16:51:45.2691] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:45.2860] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49127797} [16:51:45.2868] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:45.2956] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49133658} [16:51:45.4504] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:45.6560] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49138660} [16:51:45.6568] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:45.6656] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49144521} [16:51:45.9967] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:46.2751] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49149523} [16:51:46.2759] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:46.2849] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49155384} [16:51:46.4514] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:46.7387] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49160386} [16:51:46.7394] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:46.7473] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49166247} [16:51:47.0309] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:47.2837] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49171249} [16:51:47.2846] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:47.2948] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49177110} [16:51:47.6420] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:47.9228] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49182112} [16:51:47.9235] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:47.9311] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49187973} [16:51:48.0984] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:48.1411] 
+Host Interrupt received VF0-31: IIR Data: 0x1
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49193476} [16:51:48.1443] 
+FW execution - Host interrupt VF0-31: IIR Data: 0x1
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49196398} [16:51:48.1468] 
+FW execution - Host interrupt VF32-63: IIR Data: 0x0
+[genxp.mb.gfx2.logger info Out 1] [16:51:48.1961] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49198249} [16:51:48.1968] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:48.2045] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49204096} [16:51:48.5536] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:48.8313] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49209098} [16:51:48.8321] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:48.8404] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49214945} [16:51:49.0986] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:49.3766] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49219947} [16:51:49.3774] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:49.3849] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49225794} [16:51:49.7348] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:50.0132] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49230796} [16:51:50.0139] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:50.0218] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49236643} [16:51:50.3711] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:50.6507] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49241645} [16:51:50.6517] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:50.6635] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49247492} [16:51:50.8256] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:51.1039] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49252494} [16:51:51.1046] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:51.1123] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49258341} [16:51:51.4632] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:51.4798] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49263343} [16:51:51.4808] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:51.4906] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49269190} [16:51:51.8257] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:52.1041] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49274192} [16:51:52.1051] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:52.1151] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49280039} [16:51:52.4621] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:52.9516] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49285041} [16:51:52.9568] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:52.9628] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49290888} [16:51:52.9666] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:52.9970] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49295890} [16:51:52.9977] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:53.0056] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49301737} [16:51:54.4348] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:54.4514] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49306739} [16:51:54.4522] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:54.4602] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49312586} [16:51:54.6166] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:54.8951] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49317588} [16:51:54.8960] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:54.9048] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49323435} [16:51:55.0712] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:55.3502] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49328437} [16:51:55.3511] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:55.3606] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49334284} [16:51:55.6166] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:55.8947] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49339286} [16:51:55.8954] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:55.9031] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49345133} [16:51:56.0760] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:56.3538] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49350135} [16:51:56.3546] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:56.3622] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49355982} [16:51:57.1721] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:57.6321] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49360984} [16:51:57.6328] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:57.6404] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49366831} [16:51:58.3538] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:58.8138] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49371833} [16:51:58.8146] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:58.8234] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49377680} [16:51:58.9904] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:59.2685] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49382686} [16:51:59.2693] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:59.2780] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49388539} [16:51:59.3539] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:51:59.6321] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49393563} [16:51:59.6329] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:51:59.6417] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49399416} [16:51:59.8085] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:00.1030] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49404440} [16:52:00.1038] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:00.1126] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49410293} [16:52:00.4613] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:00.7417] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49415317} [16:52:00.7426] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:00.7513] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49421170} [16:52:01.0976] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:01.3758] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49426194} [16:52:01.3766] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:01.3855] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49432047} [16:52:01.8248] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:02.1030] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49437071} [16:52:02.1037] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:02.1118] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49442924} [16:52:02.5521] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:02.7423] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49447948} [16:52:02.7432] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:02.7499] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49453801} [16:52:02.7720] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:04.5578] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49458825} [16:52:04.5585] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:04.5664] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49464678} [16:52:04.9156] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:05.1944] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49469702} [16:52:05.1951] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:05.2035] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49475555} [16:52:05.6430] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:05.9235] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49480579} [16:52:05.9244] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:05.9337] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49486432} [16:52:06.0976] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:06.4822] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49491456} [16:52:06.4876] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:06.4957] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa598 49497309} [16:52:06.4996] 
+FW execution - Render Engine: IIR Data: 0x100
+[genxp.mb.gfx2.logger info Out 1] [16:52:06.5338] 
+Doorbell Interrupt received: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] {genxp.mb.gfx2.guc0_cpu 0xa58c 49502333} [16:52:06.5347] 
+FW Execution - Doorbell Interrupt: Group: 0x0 Data: 0x8
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.1568] 
+Render Engine Interrupt received: IIR Data: 0x100
+[genxp.mb.gfx2.logger error Out 0] [16:52:08.1613] Fatal: ASSERT in ../../../ip_graphics_core/z_pipe/common/src/hz_cache_data.cpp line 400
+"New HZ Min is greater than Max. This is illegal!!" && false:. 
 
+Fail
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.2390] 
+[genxp.mb.gfx2.logger critical Out 0] [16:52:08.2391] TaskNodeAsync failed with exception, what(): 
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.2392] 
+[genxp.mb.gfx2.logger critical Out 0] [16:52:08.2393] MsgStream::Terminate with code -1
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.2394] 
+[genxp.mb.gfx2.logger critical Out 0] [16:52:08.2395] 
+[genxp.mb.gfx2.logger critical Out 0] [16:52:08.2398] 
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.2399] FATAL ../../../Cobalt/framework/lib/fs_scheduler/FsStateMachine.cpp:527 (in function Crank)  [COBALT_CORE]	FsScheduler task terminated with exception
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.2403] INFO [GENERAL]	
 
-||  || ||\\   ////   
-||==|| || || ||      BLUE SCREEN
-||  || ||//   \\\\   
-===============================================================================
-Non-pipeline state: 
-==================
-	control: 0x6
-	CSR BaseAddress: 0
-	General State Base Address: 0xffff800000000000
-	General State Size: 0xfffff000
-	Hardware Bit Enable: 0
-	Instruction Base Address: 0xffff800000000000
-	A64 Messages Disabled: No
-	CSR Forced Non Coherent: Yes
-	Save/Restore Forced Non Coherent: Yes
-	Disable Merging all messages sent to L3: No
-	Disable Merging SLM Byte Scattered messages: No
-	Disable Merging global memory Byte Scattered messages: No
-	Disable Merging Typed Messages: No
-	TRTT Enabled: No
-	Tiled Resource Virtual Address [47:44]: 0
-
-Message Information: 
-====================
-	Destination Unit Id: 0xd (CRE)
-	Response Length: 0x8
-	Destination Register: 0x8
-	Header Present: No
-	A64 Enable: No
-	Has a Potential End of Thread: No
-	Has CSR: No
-	Raw Message Descriptor: 0xf502
-	Base Address: 0xb80400060000
-	Element Size: 0x10
-	Data Size: 0x4
-	Has End Of Thread: No
-	Fixed Function ID: 0x7
-	Fixed Function Thread ID: 0
-	Execution Unit ID: 0
-	Thread Id: 0
-	Binding Table Pointer: 0
-	Binding Table Index: 0xfc
-	Bindless Surface State Offset: 0x1
-	Channel Enables: 0xffffffff
-	Byte Enables: 0xf
-	Surface target: Yes
-	Has State Read: Yes
-	Has SLM Access: No
-	L3 destination: 0
-Debug Keys: 
-============
-	Command Set Id: 0xcc9f
-	Unit Id: 0x7
-	pThread Count: 0x3405c0
-	Thread Count: 0
-	Message Id: 0
-	Message Sequence Number: 0
-	Data Sequence Number: 0
-	Request Sequence Number: 0x1
-	Fixed Function Data Sequence Number: 0
-	Slice ID: 0
-	DualSubSlice ID: 0
-	SubSlice ID: 0
-
-Page Fault Details: 
-===================
-	Access Type: 0x1
-	Has Commit Mask: Yes
-	Has Replay: No
-	Message Descriptor Index: 0
-	Commit Mask In: 0
-	MessageType: 0x25 , UNKNOWN
-
-
-SURFACE DEBUG INFORMATION
-===========================
-	Cmd3DMapSurfaceType: 2D
-	isSurfaceArray: 0
-	eSurfaceFormatID: R8G8B8A8_UNORM
-	vertAlignment: 0x1
-	horzAlignment: 0x1
-	CmdSurfaceFormat tileMode: 0x1
-	verticalStride: 0
-	verticalOffset: 0
-	CmdMediaBoundPixMode boundaryMode: 0
-	baseAddress: 0xb80400060000
-	qPitch: 0
-	height: 0x20
-	width: 0x20
-	depth: 0x1
-	pitch: 0x200
-	minArrayElement: 0
-	nEntries: 0
-	rtvExtent: 0x1
-	nMSamples: 0
-	xOffset: 0
-	yOffset: 0
-	control: 0x6
-	coherencyType: 0
-	minLOD: 0
-	mipCount: 0x1
-	appendCounterEnable: 0
-	appendCounterAddress: 0
-	shaderChannelSelect: RGBA
-===================================
-
-Unexpected response length for typed surface read message (Debug Key: 0000cc9f 7 3405c0 000000 00000). 
- For more details refer to HDC Blue Screen dump above.
-Contact the test owner for any test issues or BSpec violations.
-For any debug assistance from Fulsim team, include the output "DcRtiTrace.txt" file in any communication with Fulsim HDC team.
-NOTE: DcRtiTrace.txt file is dumped only in pipe mode at present.
-
-dsja,kfjdasf
-adsfjadskljf
-asdfjdas
-l;fkjdsa
-lfjadslfjsda
-fjasd
-fjasdl
-fjdasf
-asdjf
-asdjf
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-URB-0 Gfx Address : 0x4cd40
-[genxp.mb.elg.logger info Out 1] [14:33:03.6119] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109016 ]
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-URB-0 Gfx Address : 0x4cd40
-[genxp.mb.elg.logger info Out 1] [14:33:03.6119] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109020 ]
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-URB-0 Gfx Address : 0x4cdc0
-[genxp.mb.elg.logger info Out 1] [14:33:03.6120] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109020 ]
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-URB-0 Gfx Address : 0x4cdc0
-[genxp.mb.elg.logger info Out 1] [14:33:03.6120] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109024 ]
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-URB-0 Gfx Address : 0x4ce40
-[genxp.mb.elg.logger info Out 1] [14:33:03.6121] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109024 ]
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-URB-0 Gfx Address : 0x4ce40
-[genxp.mb.elg.logger info Out 1] [14:33:03.6122] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109028 ]
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-URB-0 Gfx Address : 0x4cec0
-[genxp.mb.elg.logger info Out 1] [14:33:03.6122] WARNING [tile_0.m_gt_core.DvRender.URBCO3][ clk 4109028 ]
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request
-*********************************************************
-
-*********************** WARNING *************************
-Attempting to Read from a URB location which has not seen
-any Writes before servicing the incoming Read Request gfasdgjsdklfasd
-*********************************************************
-
-
-fakjsdhfklasdfh
-sdahfljsdafhkasdlfhasd
-fh
-asdfh
-sdafhasdkj
-fhsad
-fhasd'
-fhasd
-fh
-asdfhasd
-fhjasdkfhasdfhasdfhjasd
-fh
-asdj
-sdf
-asdhfasdkjfhasd
-
-File: cobalt2.log
-***** **** *** ** * FATAL * ** *** **** *****
-GetDependencyType>Cobalt internal error detected. Please contact EU team.
-Wrong SWSB info: 64
-***** **** *** ** END FATAL ** *** **** *****
-
-File: cobalt2.log
-***** **** *** ** * FATAL * ** *** **** *****
-GetDependencyType>Cobalt internal error detected. Please contact EU team.
-Wrong SWSB info: 64
-***** **** *** ** END FATAL ** *** **** *****
-
-File: cobalt2.log
-***** **** *** ** * FATAL * ** *** **** *****
-GetDependencyType>Cobalt internal error detected. Please contact EU team.
-Wrong SWSB info: 64
-***** **** *** ** END FATAL ** *** **** *****
-
-File: cobalt2-tail.log
-***** **** *** ** * FATAL * ** *** **** *****
-ExtractDWordParameter>Invalid message length for the intended Sampler message.
-***** **** *** ** END FATAL ** *** **** *****
-
-File: cobalt2-tail.log
-***** **** *** ** * FATAL * ** *** **** *****
-ExtractDWordParameter>Invalid message length for the intended Sampler message.
-***** **** *** ** END FATAL ** *** **** *****
+*---------------------- Exception(s) ----------------------*
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.2404] INFO [GENERAL]	Terminate due to CB_CHECK/CB_FATAL log message : FsScheduler task terminated with exception
+[genxp.mb.gfx2.logger info Out 1] [16:52:08.2405] INFO [GENERAL]	GT shell thread has exited. Thread ID = 22969933678336. IP type = 1.

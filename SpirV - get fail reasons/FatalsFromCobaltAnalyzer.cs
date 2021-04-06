@@ -74,7 +74,6 @@ namespace SpirV___get_fail_reasons
 
             try
             {
-                //log = LoadTestLog();
                 Match firstHeader = null, secondHeader = null;
                 while (true)
                 {
@@ -121,7 +120,6 @@ namespace SpirV___get_fail_reasons
             List<String> parsedLogs = new List<String>();
             try
             {
-                //log = LoadTestLog();
                 Match firstHeader = null, secondHeader = null;
                 while (true)
                 {
@@ -226,6 +224,8 @@ namespace SpirV___get_fail_reasons
                                                 log = this.DataAnalyzer.DownloadAsync(downloadHyperLink);
                                             }
 
+                                            //log = LoadTestLog();
+
                                             try
                                             {
                                                 parsedLogs = ParseFatals(result, log, "Cobalt2.log");
@@ -268,7 +268,7 @@ namespace SpirV___get_fail_reasons
 
                                             try
                                             {
-                                                keywords = new String[] { @"FATAL: ASSERT", "Fail" };
+                                                keywords = new String[] { @"Fatal: ASSERT", @"Fail" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
                                                 task.SubTask.AddRange(parsedLogs);
                                             }

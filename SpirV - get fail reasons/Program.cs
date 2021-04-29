@@ -46,6 +46,8 @@ namespace SpirV___get_fail_reasons
                         executionType = ExecutionType.GetCorruptedImages;
                     else if (args[i + 1].ToLower() == "getfatalsfromcobalt")
                         executionType = ExecutionType.GetFatalsFromCobalt;
+                    else if (args[i + 1].ToLower() == "getgitsplayerlogs")
+                        executionType = ExecutionType.GetGitsPlayerLogs;
                     args = RemoveUsedArguments(args, i);
                     break;
                 }
@@ -160,6 +162,8 @@ namespace SpirV___get_fail_reasons
                 GetCorruptedImagesProgram.Main();
             else if (executionType == ExecutionType.GetFatalsFromCobalt)
                 GetFatalsFromCobaltProgram.Main();
+            else if (executionType == ExecutionType.GetGitsPlayerLogs)
+                GetGitsPlayerLogsProgram.Main();
 
             Console.Out.WriteLine("Enter any key to exit...");
             Console.In.ReadLine();

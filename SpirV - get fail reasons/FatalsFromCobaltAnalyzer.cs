@@ -142,9 +142,9 @@ namespace SpirV___get_fail_reasons
                             break;
                     }
 
-                    if (firstHeader.Index > 0 && secondHeader.Index > 0)
+                    if (firstHeader.Index > 0 && (secondHeader.Index + secondHeader.Length) > 0)
                     {
-                        String parsedLog = "File: " + taskLog + Environment.NewLine + ReadMatch(log, firstHeader, secondHeader);
+                        String parsedLog = "File: " + taskLog + Environment.NewLine + log.Substring(firstHeader.Index, secondHeader.Index + secondHeader.Length);
                         if (parsedLog != String.Empty)
                         {
                             if (!parsedLogs.Contains(parsedLog))

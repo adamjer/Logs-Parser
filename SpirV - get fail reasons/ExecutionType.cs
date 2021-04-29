@@ -10,6 +10,7 @@ namespace SpirV___get_fail_reasons
     {
         GetSpirV,
         GetCorruptedImages,
-        GetFatalsFromCobalt
+        GetFatalsFromCobalt,
+        GetGitsPlayerLogs
     }
 }

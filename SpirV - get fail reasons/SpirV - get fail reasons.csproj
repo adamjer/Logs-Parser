@@ -63,6 +63,8 @@
     <Compile Include="FatalsFromCobaltAnalyzer.cs" />
     <Compile Include="GetCorruptedImagesProgram.cs" />
     <Compile Include="GetFatalsFromCobaltProgram.cs" />
+    <Compile Include="GetGitsPlayerLogsProgram.cs" />
+    <Compile Include="GitsPlayerLogsAnalyzer.cs" />
     <Compile Include="ImagesFromDataAnalyzer.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobSet.cs" />

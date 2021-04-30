@@ -9,30 +9,36 @@ using System.Threading.Tasks;
 
 namespace SpirV___get_fail_reasons
 {
-    class LogsFromDataAnalyzer
+    class LogsFromDataAnalyzer : Analyzer
     {
-        private DataAnalyzer DataAnalyzer { get; set; }
-        public List<GtaxResult> Results { get; set; }
 
-        private String Hyperlink(String jobId, String testNumber, String taskLog)
+        public LogsFromDataAnalyzer() : base()
         {
-            if (Program.environment == EnvironmentType.Silicon)
-                return $"http://gtax-igk.intel.com/logs/jobs/jobs/0000/{jobId.Substring(0, 4)}/{jobId}/logs/tests/{testNumber}/{taskLog}";
-            else if (Program.environment == EnvironmentType.Simulation)
-                return $"https://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{jobId.Substring(0, 4)}/{jobId}/logs/tests/{testNumber}/{taskLog}";
-            else if (Program.environment == EnvironmentType.Emulation)
-                throw new Exception("Emulation not supported yet!");
-            else
-                return "";
         }
 
-        public LogsFromDataAnalyzer(DataAnalyzer dataAnalyzer)
+        public LogsFromDataAnalyzer(DataAnalyzer dataAnalyzer) : base(dataAnalyzer)
         {
-            this.DataAnalyzer = dataAnalyzer;
-            this.Results = new List<GtaxResult>();
         }
 
-        public void Analyze()
+        private String ReadSubTask(String log, Match firstHeader, Match secondHeader)
+        {
+            String line;
+            StringReader reader = new StringReader(log.Substring(firstHeader.Index, secondHeader.Index + secondHeader.Length - firstHeader.Index));
+            StringBuilder builder = new StringBuilder();
+
+            while ((line = reader.ReadLine()) != secondHeader.Value)
+            {
+                if (line == null)
+                    break;
+                if (!builder.ToString().Contains(line))
+                    builder.AppendLine(line);
+            }
+            builder.AppendLine(line);
+
+            return builder.ToString();
+        }
+
+        override public void Analyze()
         {
             String testNumber, hyperlink, log;
             foreach (Result result in this.DataAnalyzer.Results)
@@ -45,7 +51,7 @@ namespace SpirV___get_fail_reasons
                     {
                         if (Regex.IsMatch(taskLog, $"{result.BusinessAttributes.ItemName}.*.log"))
                         {
-                            hyperlink = this.Hyperlink(result.JobID, testNumber, taskLog);
+                            hyperlink = this.GetTestResultsHyperlink(result.JobID, testNumber, taskLog);
                             task.Name = result.BusinessAttributes.ItemName;
                             task.SetLink(result.JobID, result.ID);
 
@@ -83,24 +89,6 @@ namespace SpirV___get_fail_reasons
                     }
                 }
             }
-        }
-
-        private String ReadSubTask(String log, Match firstHeader, Match secondHeader)
-        {
-            String line;
-            StringReader reader = new StringReader(log.Substring(firstHeader.Index, secondHeader.Index + secondHeader.Length - firstHeader.Index));
-            StringBuilder builder = new StringBuilder();
-
-            while ((line = reader.ReadLine()) != secondHeader.Value)
-            {
-                if (line == null)
-                    break;
-                if (!builder.ToString().Contains(line))
-                    builder.AppendLine(line);
-            }
-            builder.AppendLine(line);
-
-            return builder.ToString();
         }
     }
 }

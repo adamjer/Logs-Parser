@@ -156,14 +156,28 @@ namespace SpirV___get_fail_reasons
                 Parse(ref args);
             }
 
+            Analyzer analyzer = null;
             if (executionType == ExecutionType.GetSpirV)
-                spirVProgram.Main();
-            else if (executionType == ExecutionType.GetCorruptedImages)
-                GetCorruptedImagesProgram.Main();
-            else if (executionType == ExecutionType.GetFatalsFromCobalt)
-                GetFatalsFromCobaltProgram.Main();
-            else if (executionType == ExecutionType.GetGitsPlayerLogs)
-                GetGitsPlayerLogsProgram.Main();
+                analyzer = new LogsFromDataAnalyzer();
+            if (executionType == ExecutionType.GetCorruptedImages)
+                analyzer = new ImagesFromDataAnalyzer();
+            if (executionType == ExecutionType.GetFatalsFromCobalt)
+                analyzer = new FatalsFromCobaltAnalyzer();
+            if (executionType == ExecutionType.GetGitsPlayerLogs)
+                analyzer = new GitsPlayerLogsAnalyzer();
+
+            try
+            {
+                analyzer.Init();
+                analyzer.Analyze();
+
+                ExcelDataWriter excelDataWriter = new ExcelDataWriter(analyzer.Results.ToList(), DataAnalyzer.Instance);
+                excelDataWriter.Write();
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+            }
 
             Console.Out.WriteLine("Enter any key to exit...");
             Console.In.ReadLine();

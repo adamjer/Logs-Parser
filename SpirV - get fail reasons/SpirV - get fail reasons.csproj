@@ -62,9 +62,6 @@
     <Compile Include="ExcelDataWriter.cs" />
     <Compile Include="ExecutionType.cs" />
     <Compile Include="FatalsFromCobaltAnalyzer.cs" />
-    <Compile Include="GetCorruptedImagesProgram.cs" />
-    <Compile Include="GetFatalsFromCobaltProgram.cs" />
-    <Compile Include="GetGitsPlayerLogsProgram.cs" />
     <Compile Include="GitsPlayerLogsAnalyzer.cs" />
     <Compile Include="ImagesFromDataAnalyzer.cs" />
     <Compile Include="Job.cs" />
@@ -76,7 +73,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
-    <Compile Include="spirVProgram.cs" />
     <Compile Include="GtaxResult.cs" />
   </ItemGroup>
   <ItemGroup>

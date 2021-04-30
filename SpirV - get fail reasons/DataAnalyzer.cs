@@ -54,7 +54,6 @@ namespace SpirV___get_fail_reasons
 
         private static DataAnalyzer m_oInstance = null;
         private static readonly object m_oPadLock = new object();
-        private int m_nCounter = 0;
         private String jsonResult;
         private JobSet jobSet;
         
@@ -171,11 +170,6 @@ namespace SpirV___get_fail_reasons
             // add a new line because user pressed enter at the end of their password
             Console.WriteLine();
             return password;
-        }
-
-        private DataAnalyzer()
-        {
-            m_nCounter = 1;
         }
     }
 }

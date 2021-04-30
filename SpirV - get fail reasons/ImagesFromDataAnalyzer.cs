@@ -10,11 +10,21 @@ using System.Threading.Tasks;
 
 namespace SpirV___get_fail_reasons
 {
-    class ImagesFromDataAnalyzer
+    class ImagesFromDataAnalyzer : Analyzer
     {
-        private DataAnalyzer DataAnalyzer { get; set; }
         public Dictionary<Image, String> Images { get; set; }
         public int ImagesCounter { get; private set; } = 0;
+
+        public ImagesFromDataAnalyzer() : base()
+        {
+            this.Images = new Dictionary<Image, String>();
+        }
+
+        public ImagesFromDataAnalyzer(DataAnalyzer dataAnalyzer) : base(dataAnalyzer)
+        {
+            this.Images = new Dictionary<Image, String>();
+        }
+
         private String ReferencePath
         {
             get { return Program.outputPath + @"\testSession_" + DataAnalyzer.JobSetSessionID + @"\references"; }
@@ -26,12 +36,6 @@ namespace SpirV___get_fail_reasons
         private bool FlushImages
         {
             get { return this.Images.Count > 50; }
-        }
-
-        public ImagesFromDataAnalyzer(DataAnalyzer dataAnalyzer)
-        {
-            this.DataAnalyzer = dataAnalyzer;
-            this.Images = new Dictionary<Image, String>();
         }
 
         private void CreateInitCatalogs()
@@ -82,14 +86,14 @@ namespace SpirV___get_fail_reasons
             }
         }
 
-        public void Analyze()
+        override public void Analyze()
         {
             String hyperlink = "";
             String jsonResult = "";
             this.CreateInitCatalogs();
             foreach (JobSetSessionNS.JobSetSession jobSetSession in DataAnalyzer.JobSetSession.JobSetSessions)
             {
-                hyperlink = $"http://gtax-igk.intel.com/api/v1/jobsets/{jobSetSession.ID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
+                hyperlink = this.GetJobsetSessionHyperlink(jobSetSession);
                 if (jobSetSession.Status.ToLower() == "completed" && jobSetSession.BusinessAttributes.Planning.Attributes.Environment.ToLower() == "silicon")
                 {
                     jsonResult = this.DataAnalyzer.webClient.DownloadString(hyperlink);

@@ -11,14 +11,14 @@ namespace SpirV___get_fail_reasons
 {
     class ExcelDataWriter
     {
-        private List<SpirVTask> Results { get; set; }
+        private List<GtaxResult> Results { get; set; }
         private DataAnalyzer DataAnalyzer { get; set; }
 
         private Application excel;
         private Workbook workBook;
         private List<Worksheet> workSheets;
 
-        public ExcelDataWriter(List<SpirVTask> r, DataAnalyzer jsa)
+        public ExcelDataWriter(List<GtaxResult> r, DataAnalyzer jsa)
         {
             Results = r;
             DataAnalyzer = jsa;
@@ -116,18 +116,18 @@ namespace SpirV___get_fail_reasons
                 {
                     row = i + 2;
                     workSheets[0].Cells[row, 1] = Results[i].Name;
-                    workSheets[0].Cells[row, 3] = Results[i].SubTask.Count;
-                    workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, 5], Results[i].GTAXlink, Type.Missing, "GTA-x", "GTA-X");
+                    workSheets[0].Cells[row, 3] = Results[i].ParsedResults.Count;
+                    workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, 5], Results[i].Link, Type.Missing, "GTA-x", "GTA-X");
 
                     int passed = 0;
-                    for (int j = 0; j < Results[i].SubTask.Count; j++)
+                    for (int j = 0; j < Results[i].ParsedResults.Count; j++)
                     {
-                        if (Results[i].SubTask[j].Contains("subcase passed"))
+                        if (Results[i].ParsedResults[j].Contains("subcase passed"))
                             passed++;
                     }
-                    workSheets[0].Cells[row, 4] = (double)passed / Results[i].SubTask.Count * 100 + " %";
+                    workSheets[0].Cells[row, 4] = (double)passed / Results[i].ParsedResults.Count * 100 + " %";
 
-                    if (passed == Results[i].SubTask.Count)
+                    if (passed == Results[i].ParsedResults.Count)
                     {
                         workSheets[0].Cells[row, 2] = "Passed";
                         workSheets[0].Cells[row, 2].Interior.Color = Color.Green;                      
@@ -182,31 +182,31 @@ namespace SpirV___get_fail_reasons
                     row++;
 
                     bool isFailed = false;
-                    for (int j = 0; j < Results[i].SubTask.Count; j++)
+                    for (int j = 0; j < Results[i].ParsedResults.Count; j++)
                     {
                         workSheets[0].Cells[row + j, 1] = Results[i].Name;
-                        workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row + j, 5], Results[i].GTAXlink, Type.Missing, Results[i].GTAXlink, "GTA-X");
-                        if (Results[i].SubTask[j].Contains("passed"))
+                        workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row + j, 5], Results[i].Link, Type.Missing, Results[i].Link, "GTA-X");
+                        if (Results[i].ParsedResults[j].Contains("passed"))
                         {
                             workSheets[0].Cells[row + j, 3] = "Passed";
                             workSheets[0].Cells[row + j, 3].Interior.Color = Color.Green;
                         }
-                        else if (Results[i].SubTask[j].Contains("failed"))
+                        else if (Results[i].ParsedResults[j].Contains("failed"))
                         {
                             workSheets[0].Cells[row + j, 3] = "Failed";
                             isFailed = true;
                             workSheets[0].Cells[row + j, 3].Interior.Color = Color.Red;
                         }
 
-                        workSheets[0].Cells[row + j, 2] = Regex.Match(Results[i].SubTask[j], @"(?<=--> )(.*)(?=subcase:)").Value;
+                        workSheets[0].Cells[row + j, 2] = Regex.Match(Results[i].ParsedResults[j], @"(?<=--> )(.*)(?=subcase:)").Value;
 
-                        if (Results[i].SubTask[j].Length > 5000)
-                            Results[i].SubTask[j] = Results[i].SubTask[j].Substring(0, 5000);
+                        if (Results[i].ParsedResults[j].Length > 5000)
+                            Results[i].ParsedResults[j] = Results[i].ParsedResults[j].Substring(0, 5000);
 
-                        workSheets[0].Cells[row + j, 4] = Results[i].SubTask[j];
+                        workSheets[0].Cells[row + j, 4] = Results[i].ParsedResults[j];
                     }
 
-                    subtasks += Results[i].SubTask.Count;
+                    subtasks += Results[i].ParsedResults.Count;
 
                     if (isFailed)
                         workSheets[0].Cells[row - 1, 1].Interior.Color = Color.IndianRed;
@@ -250,11 +250,11 @@ namespace SpirV___get_fail_reasons
                     row = i + 2;
                     workSheets[0].Cells[row, testNameColumn] = Results[i].Name;
                     workSheets[0].Cells[row, statusColumn] = Results[i].Status;
-                    workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, gtaxLinkColumn], Results[i].GTAXlink, Type.Missing, Results[i].GTAXlink, Results[i].GTAXlink);
+                    workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, gtaxLinkColumn], Results[i].Link, Type.Missing, Results[i].Link, Results[i].Link);
 
-                    for(int j = 0; j < Results[i].SubTask.Count; j++)
+                    for(int j = 0; j < Results[i].ParsedResults.Count; j++)
                     {
-                        workSheets[0].Cells[row, gtaxLinkColumn + j + 1] = Results[i].SubTask[j];
+                        workSheets[0].Cells[row, gtaxLinkColumn + j + 1] = Results[i].ParsedResults[j];
                     }
                 }
             }
@@ -276,8 +276,8 @@ namespace SpirV___get_fail_reasons
             int result = 0;
             foreach (var r in Results)
             {
-                if (r.SubTask.Count > result)
-                    result = r.SubTask.Count;
+                if (r.ParsedResults.Count > result)
+                    result = r.ParsedResults.Count;
             }
             return result;
         }

@@ -89,7 +89,7 @@ namespace SpirV___get_fail_reasons
         {
             for (int i = 0; i < args.Length; i++)
             {
-                if (args[i].ToLower() == "-clear")
+                if (args[i].ToLower() == "-clearImages")
                 {
                     Clear = true;
 
@@ -119,7 +119,7 @@ namespace SpirV___get_fail_reasons
             }
         }
 
-        //choose environment
+        //choose excel formating
         private static void ParseWriteExcelType(ref string[] args)
         {
             for (int i = 0; i < args.Length; i++)

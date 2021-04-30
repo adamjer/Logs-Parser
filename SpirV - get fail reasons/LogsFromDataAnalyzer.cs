@@ -12,7 +12,7 @@ namespace SpirV___get_fail_reasons
     class LogsFromDataAnalyzer
     {
         private DataAnalyzer DataAnalyzer { get; set; }
-        public List<SpirVTask> Results { get; set; }
+        public List<GtaxResult> Results { get; set; }
 
         private String Hyperlink(String jobId, String testNumber, String taskLog)
         {
@@ -29,7 +29,7 @@ namespace SpirV___get_fail_reasons
         public LogsFromDataAnalyzer(DataAnalyzer dataAnalyzer)
         {
             this.DataAnalyzer = dataAnalyzer;
-            this.Results = new List<SpirVTask>();
+            this.Results = new List<GtaxResult>();
         }
 
         public void Analyze()
@@ -40,7 +40,7 @@ namespace SpirV___get_fail_reasons
                 if (result.Artifacts != null)
                 {
                     testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
-                    SpirVTask task = new SpirVTask();
+                    GtaxResult task = new GtaxResult();
                     foreach (String taskLog in result.Artifacts.TaskLogs)
                     {
                         if (Regex.IsMatch(taskLog, $"{result.BusinessAttributes.ItemName}.*.log"))
@@ -70,7 +70,7 @@ namespace SpirV___get_fail_reasons
                                     }
 
                                     //if (secondHeader.Value.Contains("failed"))
-                                    task.SubTask.Add(ReadSubTask(log, firstHeader, secondHeader));
+                                    task.ParsedResults.Add(ReadSubTask(log, firstHeader, secondHeader));
                                 }
                                 Results.Add(task);
                             }

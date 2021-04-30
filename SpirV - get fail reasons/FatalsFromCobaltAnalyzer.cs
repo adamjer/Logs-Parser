@@ -14,12 +14,12 @@ namespace SpirV___get_fail_reasons
     class FatalsFromCobaltAnalyzer
     {
         private DataAnalyzer DataAnalyzer { get; set; }
-        public ConcurrentBag<SpirVTask> Results { get; set; }
+        public ConcurrentBag<GtaxResult> Results { get; set; }
 
         public FatalsFromCobaltAnalyzer(DataAnalyzer dataAnalyzer)
         {
             this.DataAnalyzer = dataAnalyzer;
-            this.Results = new ConcurrentBag<SpirVTask>();
+            this.Results = new ConcurrentBag<GtaxResult>();
         }
 
         private String GetJobsetHyperlink(JobSetSessionNS.JobSetSession jobSetSession)
@@ -194,7 +194,7 @@ namespace SpirV___get_fail_reasons
                                 {
                                     if (result.Artifacts != null)
                                     {
-                                        SpirVTask task = new SpirVTask();
+                                        GtaxResult task = new GtaxResult();
                                         List<String> parsedLogs = new List<string>();
                                         task.Name = result.BusinessAttributes.ItemName;
                                         task.Status = result.GTAStatus;
@@ -229,7 +229,7 @@ namespace SpirV___get_fail_reasons
                                             try
                                             {
                                                 parsedLogs = ParseFatals(result, log, "Cobalt2.log");
-                                                task.SubTask.AddRange(parsedLogs);
+                                                task.ParsedResults.AddRange(parsedLogs);
                                             }
                                             catch (Exception ex)
                                             {
@@ -243,7 +243,7 @@ namespace SpirV___get_fail_reasons
                                                 keywords = new String[] { @"||  || ||\\   ////",
                                         @"For more details refer to HDC Blue Screen dump above." };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.SubTask.AddRange(parsedLogs);
+                                                task.ParsedResults.AddRange(parsedLogs);
                                             }
                                             catch (Exception ex)
                                             {
@@ -257,7 +257,7 @@ namespace SpirV___get_fail_reasons
                                                 keywords = new String[] { @"*********************** WARNING *************************",
                                         @"*********************************************************" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.SubTask.AddRange(parsedLogs);
+                                                task.ParsedResults.AddRange(parsedLogs);
                                             }
                                             catch (Exception ex)
                                             {
@@ -270,7 +270,7 @@ namespace SpirV___get_fail_reasons
                                             {
                                                 keywords = new String[] { @"Fatal: ASSERT", @"Fail" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.SubTask.AddRange(parsedLogs);
+                                                task.ParsedResults.AddRange(parsedLogs);
                                             }
                                             catch (Exception ex)
                                             {
@@ -283,7 +283,7 @@ namespace SpirV___get_fail_reasons
                                             {
                                                 keywords = new String[] { @"WARNING:", "\n" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.SubTask.AddRange(parsedLogs);
+                                                task.ParsedResults.AddRange(parsedLogs);
                                             }
                                             catch (Exception ex)
                                             {
@@ -296,7 +296,7 @@ namespace SpirV___get_fail_reasons
                                             {
                                                 keywords = new String[] { @"ERROR:", "\n" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.SubTask.AddRange(parsedLogs);
+                                                task.ParsedResults.AddRange(parsedLogs);
                                             }
                                             catch (Exception ex)
                                             {
@@ -309,7 +309,7 @@ namespace SpirV___get_fail_reasons
                                             {
                                                 keywords = new String[] { @"INFO:", "\n" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.SubTask.AddRange(parsedLogs);
+                                                task.ParsedResults.AddRange(parsedLogs);
                                             }
                                             catch (Exception ex)
                                             {
@@ -320,8 +320,8 @@ namespace SpirV___get_fail_reasons
 
                                             try
                                             {
-                                                if (task.SubTask.Count == 0)
-                                                    task.SubTask.AddRange(ParseExceptionLastLines(log, "failed with exception, what():", 2000, "Cobalt2.log"));
+                                                if (task.ParsedResults.Count == 0)
+                                                    task.ParsedResults.AddRange(ParseExceptionLastLines(log, "failed with exception, what():", 2000, "Cobalt2.log"));
                                             }
                                             catch (Exception ex)
                                             {
@@ -332,9 +332,9 @@ namespace SpirV___get_fail_reasons
 
                                             try
                                             {
-                                                if (task.SubTask.Count > 0)
+                                                if (task.ParsedResults.Count > 0)
                                                 {
-                                                    task.SubTask = task.SubTask.Distinct().ToList();
+                                                    task.ParsedResults = task.ParsedResults.Distinct().ToList();
                                                     Results.Add(task);
                                                     Console.Out.WriteLine("Results count: " + Results.Count);
                                                 }

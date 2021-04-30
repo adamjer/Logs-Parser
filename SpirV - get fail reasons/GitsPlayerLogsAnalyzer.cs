@@ -15,12 +15,12 @@ namespace SpirV___get_fail_reasons
     class GitsPlayerLogsAnalyzer
     {
         private DataAnalyzer DataAnalyzer { get; set; }
-        public ConcurrentBag<SpirVTask> Results { get; set; }
+        public ConcurrentBag<GtaxResult> Results { get; set; }
 
         public GitsPlayerLogsAnalyzer(DataAnalyzer dataAnalyzer)
         {
             this.DataAnalyzer = dataAnalyzer;
-            this.Results = new ConcurrentBag<SpirVTask>();
+            this.Results = new ConcurrentBag<GtaxResult>();
         }
 
         private String GetJobsetHyperlink(JobSetSessionNS.JobSetSession jobSetSession)
@@ -33,6 +33,15 @@ namespace SpirV___get_fail_reasons
                 throw new Exception("Emulation not supported yet!");
             else
                 return "";
+        }
+
+        private String LoadTestLog()
+        {
+            String result = "";
+
+            result = File.ReadAllText(@"C:\Users\ajerecze\OneDrive - Intel Corporation\Documents\Visual Studio 2019\Projects\spirv---get-fail-reasons\SpirV - get fail reasons\Test\test.txt");
+
+            return result;
         }
 
         private String ReadMatch(String log, Match firstHeader, Match secondHeader)
@@ -128,7 +137,7 @@ namespace SpirV___get_fail_reasons
                             {
                                 if (result.Artifacts != null)
                                 {
-                                    SpirVTask task = new SpirVTask();
+                                    GtaxResult task = new GtaxResult();
                                     List<String> parsedLogs = new List<string>();
                                     task.Name = result.BusinessAttributes.ItemName;
                                     task.Status = result.GTAStatus;
@@ -154,11 +163,13 @@ namespace SpirV___get_fail_reasons
                                             Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
                                         }
 
+                                        //log = LoadTestLog();
+
                                         try
                                         {
                                             keywords = new String[] { @"Warn: The", @"GITS internal format." };
                                             parsedLogs = Parse(result, log, keywords, "gits_player_output.log");
-                                            task.SubTask.AddRange(parsedLogs);
+                                            task.ParsedResults.AddRange(parsedLogs);
                                         }
                                         catch(Exception ex)
                                         {
@@ -170,7 +181,7 @@ namespace SpirV___get_fail_reasons
                                         {
                                             keywords = new String[] { @"Err:", "\n" };
                                             parsedLogs = Parse(result, log, keywords, "gits_player_output.log");
-                                            task.SubTask.AddRange(parsedLogs);
+                                            task.ParsedResults.AddRange(parsedLogs);
                                         }
                                         catch (Exception ex)
                                         {
@@ -180,9 +191,9 @@ namespace SpirV___get_fail_reasons
 
                                         try
                                         {
-                                            if (task.SubTask.Count > 0)
+                                            if (task.ParsedResults.Count > 0)
                                             {
-                                                task.SubTask = task.SubTask.Distinct().ToList();
+                                                task.ParsedResults = task.ParsedResults.Distinct().ToList();
                                                 Results.Add(task);
                                                 Console.Out.WriteLine("Results count: " + Results.Count);
                                             }

@@ -121,14 +121,13 @@ namespace SpirV___get_fail_reasons
                                         String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
 
                                         var logNames = result.Artifacts.TaskLogs.Where(l => l.ToLower().Contains("cobalt2")).Where(l => !l.Contains(".gz"));
-                                        if (logNames.Contains("Cobalt2-tail.log"))
+                                        if (logNames.Any(l => l.ToLower().Contains("cobalt2-tail.log")))
                                         {
-                                            logNames = logNames.Where(l => !l.Contains("Cobalt2.log") && !l.Contains("Cobalt2-head.log"));
+                                            logNames = logNames.Where(l => !l.ToLower().Contains("cobalt2.log") && !l.ToLower().Contains("cobalt2-head.log"));
                                         }
 
                                         foreach (string logName in logNames)
-                                        {
-                                            String[] keywords;
+                                        {                                           
                                             try
                                             {
                                                 downloadHyperLink = GetTestResultsHyperlink(result.JobID, testNumber, logName);
@@ -155,6 +154,7 @@ namespace SpirV___get_fail_reasons
                                                 Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
                                             }
 
+                                            String[] keywords;
                                             try
                                             {
                                                 keywords = new String[] { @"||  || ||\\   ////",
@@ -225,6 +225,32 @@ namespace SpirV___get_fail_reasons
                                             try
                                             {
                                                 keywords = new String[] { @"INFO:", "\n" };
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.ParsedResults.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                keywords = new String[] { @"WARNING", "\n" };
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.ParsedResults.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                keywords = new String[] { @"INFO", "\n" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
                                                 task.ParsedResults.AddRange(parsedLogs);
                                             }

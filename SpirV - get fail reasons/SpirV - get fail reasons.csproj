@@ -54,25 +54,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analyzer.cs" />
-    <Compile Include="Artifacts.cs" />
-    <Compile Include="BusinessAttributes.cs" />
+    <Compile Include="Analyzers\Analyzer.cs" />
+    <Compile Include="GTAX\Artifacts.cs" />
+    <Compile Include="GTAX\BusinessAttributes.cs" />
     <Compile Include="EnvironmentType.cs" />
-    <Compile Include="ExcelDataSaveType.cs" />
-    <Compile Include="ExcelDataWriter.cs" />
+    <Compile Include="Excel\ExcelDataSaveType.cs" />
+    <Compile Include="Excel\ExcelDataWriter.cs" />
     <Compile Include="ExecutionType.cs" />
-    <Compile Include="FatalsFromCobaltAnalyzer.cs" />
-    <Compile Include="GitsPlayerLogsAnalyzer.cs" />
-    <Compile Include="ImagesFromDataAnalyzer.cs" />
-    <Compile Include="Job.cs" />
-    <Compile Include="JobSet.cs" />
-    <Compile Include="DataAnalyzer.cs" />
-    <Compile Include="JobSetSession.cs" />
-    <Compile Include="JobSetSessionData.cs" />
-    <Compile Include="LogsFromDataAnalyzer.cs" />
+    <Compile Include="Analyzers\FatalsFromCobaltAnalyzer.cs" />
+    <Compile Include="Analyzers\GitsPlayerLogsAnalyzer.cs" />
+    <Compile Include="Analyzers\ImagesFromDataAnalyzer.cs" />
+    <Compile Include="GTAX\Job.cs" />
+    <Compile Include="GTAX\JobSet.cs" />
+    <Compile Include="Analyzers\DataAnalyzer.cs" />
+    <Compile Include="GTAX\JobSetSession.cs" />
+    <Compile Include="GTAX\JobSetSessionData.cs" />
+    <Compile Include="Analyzers\LogsFromDataAnalyzer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result.cs" />
+    <Compile Include="GTAX\Result.cs" />
     <Compile Include="GtaxResult.cs" />
   </ItemGroup>
   <ItemGroup>

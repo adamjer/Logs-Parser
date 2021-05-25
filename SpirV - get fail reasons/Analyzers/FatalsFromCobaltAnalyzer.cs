@@ -155,24 +155,25 @@ namespace SpirV___get_fail_reasons
                                             }
 
                                             String[] keywords;
-                                            try
-                                            {
-                                                keywords = new String[] { @"||  || ||\\   ////",
-                                        @"For more details refer to HDC Blue Screen dump above." };
-                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.ParsedResults.AddRange(parsedLogs);
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                Console.Out.WriteLine(ex.Message);
-                                                Console.Out.WriteLine("Download log: " + ex.Message);
-                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
-                                            }
+                                            //Bluescreens are contained in FATALS
+                                            //try
+                                            //{
+                                            //    keywords = new String[] { @"||  || ||\\   ////",
+                                            //        @"For more details refer to HDC Blue Screen dump above." };
+                                            //    parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                            //    task.ParsedResults.AddRange(parsedLogs);
+                                            //}
+                                            //catch (Exception ex)
+                                            //{
+                                            //    Console.Out.WriteLine(ex.Message);
+                                            //    Console.Out.WriteLine("Download log: " + ex.Message);
+                                            //    Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            //}
 
                                             try
                                             {
                                                 keywords = new String[] { @"*********************** WARNING *************************",
-                                        @"*********************************************************" };
+                                                    @"*********************************************************" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
                                                 task.ParsedResults.AddRange(parsedLogs);
                                             }
@@ -198,19 +199,6 @@ namespace SpirV___get_fail_reasons
 
                                             try
                                             {
-                                                keywords = new String[] { @"WARNING:", "\n" };
-                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
-                                                task.ParsedResults.AddRange(parsedLogs);
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                Console.Out.WriteLine(ex.Message);
-                                                Console.Out.WriteLine("Download log: " + ex.Message);
-                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
-                                            }
-
-                                            try
-                                            {
                                                 keywords = new String[] { @"ERROR:", "\n" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
                                                 task.ParsedResults.AddRange(parsedLogs);
@@ -224,7 +212,7 @@ namespace SpirV___get_fail_reasons
 
                                             try
                                             {
-                                                keywords = new String[] { @"INFO:", "\n" };
+                                                keywords = new String[] { @"WARNING:", "\n" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
                                                 task.ParsedResults.AddRange(parsedLogs);
                                             }
@@ -234,7 +222,7 @@ namespace SpirV___get_fail_reasons
                                                 Console.Out.WriteLine("Download log: " + ex.Message);
                                                 Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
                                             }
-
+                                           
                                             try
                                             {
                                                 keywords = new String[] { @"WARNING", "\n" };
@@ -251,6 +239,19 @@ namespace SpirV___get_fail_reasons
                                             try
                                             {
                                                 keywords = new String[] { @"INFO", "\n" };
+                                                parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
+                                                task.ParsedResults.AddRange(parsedLogs);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.Out.WriteLine(ex.Message);
+                                                Console.Out.WriteLine("Download log: " + ex.Message);
+                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            }
+
+                                            try
+                                            {
+                                                keywords = new String[] { @"INFO:", "\n" };
                                                 parsedLogs = Parse(result, log, keywords, "Cobalt2.log");
                                                 task.ParsedResults.AddRange(parsedLogs);
                                             }

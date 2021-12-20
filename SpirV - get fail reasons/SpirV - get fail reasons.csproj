@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzers\Analyzer.cs" />
+    <Compile Include="Analyzers\JobOutputAnalyzer.cs" />
     <Compile Include="GTAX\Artifacts.cs" />
     <Compile Include="GTAX\BusinessAttributes.cs" />
-    <Compile Include="EnvironmentType.cs" />
     <Compile Include="Excel\ExcelDataSaveType.cs" />
     <Compile Include="Excel\ExcelDataWriter.cs" />
     <Compile Include="ExecutionType.cs" />
@@ -65,8 +65,9 @@
     <Compile Include="Analyzers\GitsPlayerLogsAnalyzer.cs" />
     <Compile Include="Analyzers\ImagesFromDataAnalyzer.cs" />
     <Compile Include="GTAX\Job.cs" />
-    <Compile Include="GTAX\JobSet.cs" />
+    <Compile Include="GTAX\GTAX_Jobs.cs" />
     <Compile Include="Analyzers\DataAnalyzer.cs" />
+    <Compile Include="GTAX\JobOutput.cs" />
     <Compile Include="GTAX\JobSetSession.cs" />
     <Compile Include="GTAX\JobSetSessionData.cs" />
     <Compile Include="Analyzers\LogsFromDataAnalyzer.cs" />

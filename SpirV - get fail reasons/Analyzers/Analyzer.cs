@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpirV___get_fail_reasons.GTAX;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -29,26 +30,12 @@ namespace SpirV___get_fail_reasons
 
         protected String GetJobsetSessionHyperlink(JobSetSessionNS.JobSetSession jobSetSession)
         {
-            if (Program.environment == EnvironmentType.Silicon)
-                return $"http://gtax-igk.intel.com/api/v1/jobsets/{jobSetSession.ID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
-            else if (Program.environment == EnvironmentType.Simulation)
-                return $"http://gtax-presi-igk.intel.com/api/v1/jobsets/{jobSetSession.ID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
-            else if (Program.environment == EnvironmentType.Emulation)
-                throw new Exception("Emulation not supported yet!");
-            else
-                return "";
+            return $"http://{Program.instance}/api/v1/jobsets/{jobSetSession.ID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
         }
 
         protected String GetTestResultsHyperlink(String jobID, String testNumber, String logName)
         {
-            if (Program.environment == EnvironmentType.Silicon)
-                return $"http://gtax-igk.intel.com/logs/jobs/jobs/0000/{jobID.Substring(0, 4)}/{jobID}/logs/tests/{testNumber}/{logName}";
-            else if (Program.environment == EnvironmentType.Simulation)
-                return $"http://gtax-presi-igk.intel.com/logs/jobs/jobs/0000/{jobID.Substring(0, 4)}/{jobID}/logs/tests/{testNumber}/{logName}";
-            else if (Program.environment == EnvironmentType.Emulation)
-                throw new Exception("Emulation not supported yet!");
-            else
-                return "";
+            return $"http://{Program.instance}/logs/jobs/jobs/0000/{jobID.Substring(0, 4)}/{jobID}/logs/tests/{testNumber}/{logName}";
         }
 
         protected String ReadMatch(String log, Match firstHeader, Match secondHeader)

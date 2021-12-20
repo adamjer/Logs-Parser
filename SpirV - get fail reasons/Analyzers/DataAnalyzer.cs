@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SpirV___get_fail_reasons.GTAX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,14 +26,7 @@ namespace SpirV___get_fail_reasons
         {
             get
             {
-                if (Program.environment == EnvironmentType.Silicon)
-                    return $"http://gtax-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
-                else if (Program.environment == EnvironmentType.Simulation)
-                    return $"http://gtax-presi-igk.intel.com/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
-                else if (Program.environment == EnvironmentType.Emulation)
-                    throw new Exception("Emulation not supported yet!");
-                else
-                    return "";
+                return $"http://{Program.instance}/api/v1/jobsets?full_info=true&jobset_session_ids={this.JobSetSessionID}&order_by=id&order_type=desc";
             }
         }
 
@@ -40,14 +34,7 @@ namespace SpirV___get_fail_reasons
         {
             get
             {
-                if (Program.environment == EnvironmentType.Silicon)
-                    return $"http://gtax-igk.intel.com/api/v1/jobsets/{JobsetID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
-                else if (Program.environment == EnvironmentType.Simulation)
-                    return $"http://gtax-presi-igk.intel.com/api/v1/jobsets/{JobsetID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
-                else if (Program.environment == EnvironmentType.Emulation)
-                    throw new Exception("Emulation not supported yet!");
-                else
-                    return "";
+                return $"http://{Program.instance}/api/v1/jobsets/{JobsetID}/results?group_by=job&include_subtasks_passcounts=false&order_by=id&order_type=desc";
             }
         }
 
@@ -55,8 +42,7 @@ namespace SpirV___get_fail_reasons
         private static DataAnalyzer m_oInstance = null;
         private static readonly object m_oPadLock = new object();
         private String jsonResult;
-        private JobSet jobSet;
-        
+        private GTAX_Jobs jobs;
         
 
         public static DataAnalyzer Instance
@@ -106,8 +92,8 @@ namespace SpirV___get_fail_reasons
             String resultsLink = JobSetLink;
             this.jsonResult = this.webClient.DownloadString(resultsLink);
 
-            this.jobSet = JsonConvert.DeserializeObject<JobSet>(this.jsonResult);
-            this.Name = Regex.Match(this.jobSet.Jobs[0].Name, @"gfx-driver-ci-master-\d+").Value;
+            this.jobs = JsonConvert.DeserializeObject<GTAX_Jobs>(this.jsonResult);
+            this.Name = Regex.Match(this.jobs.Jobs[0].Name, @"gfx-driver-ci-master-\d+").Value;
             this.OrderJobSet();
             this.jsonResult = "";
         }
@@ -124,7 +110,7 @@ namespace SpirV___get_fail_reasons
         private void OrderJobSet()
         {
             this.Results = new SortedSet<Result>();
-            foreach (Job job in this.jobSet.Jobs)
+            foreach (Job job in this.jobs.Jobs)
             {
                 foreach (Result result in job.Results)
                 {
@@ -134,7 +120,7 @@ namespace SpirV___get_fail_reasons
                     }
                 }
             }
-            this.jobSet = null;
+            this.jobs = null;
         }
 
         public string ReadPassword()

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SpirV___get_fail_reasons.GTAX;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,17 +13,17 @@ namespace SpirV___get_fail_reasons
 {
     class ImagesFromDataAnalyzer : Analyzer
     {
-        public Dictionary<Image, String> Images { get; set; }
+        public Dictionary<Image, IList<String>> Images { get; set; }
         public int ImagesCounter { get; private set; } = 0;
 
         public ImagesFromDataAnalyzer() : base()
         {
-            this.Images = new Dictionary<Image, String>();
+            this.Images = new Dictionary<Image, IList<String>>();
         }
 
         public ImagesFromDataAnalyzer(DataAnalyzer dataAnalyzer) : base(dataAnalyzer)
         {
-            this.Images = new Dictionary<Image, String>();
+            this.Images = new Dictionary<Image, IList<String>>();
         }
 
         private String ReferencePath
@@ -31,11 +32,11 @@ namespace SpirV___get_fail_reasons
         }
         private String TestPath
         {
-            get { return Program.outputPath + @"\testSession_" + DataAnalyzer.JobSetSessionID + @"\tests"; }
+            get { return Program.outputPath + @"\testSession_" + DataAnalyzer.JobSetSessionID + @"\current"; }
         }
         private bool FlushImages
         {
-            get { return this.Images.Count > 50; }
+            get { return this.Images.Count > 10; }
         }
 
         private void CreateInitCatalogs()
@@ -57,14 +58,22 @@ namespace SpirV___get_fail_reasons
             Console.Out.WriteLine("Save in progess...");
             foreach (var image in this.Images)
             {
-                if (image.Value.Contains("test}.png"))
+                var match = Regex.Match(image.Value[4], @".*f(?<frameNumber>\d+)\._(?<type>.+)_(?<id>\d+)\.png");
+                var id = match.Groups["id"].Value;
+                var type = match.Groups["type"].Value;
+                var frameNumber = match.Groups["frameNumber"].Value;
+                var frameName = $"frame{new String('0', 8 - frameNumber.Length)}{frameNumber}";
+                var pathName = $@"\{image.Value[0]}\{image.Value[1]}\{image.Value[2]}\{image.Value[3]}";
+                if (type == "result")
                 {
-                    image.Key.Save(this.TestPath + @"\" + image.Value);
+                    pathName = this.TestPath + pathName;
+                    if (!Directory.Exists(pathName))
+                        Directory.CreateDirectory(pathName);
+                    image.Key.Save($@"{pathName}\{frameName}.png");
                 }
-                else if (image.Value.Contains("ref}.png"))
-                {
-                    image.Key.Save(this.ReferencePath + @"\" + image.Value);
-                }
+                //else if (type == "ref")
+                //    pathName = this.ReferencePath + pathName;
+                //image.Key.Save(pathName);
             }
         }
 
@@ -77,7 +86,7 @@ namespace SpirV___get_fail_reasons
                 Console.Out.WriteLine($"Images flushed! Image counter: {ImagesCounter}");
                 this.Images.Clear();
             }
-            else if(forcedFlush)
+            else if (forcedFlush)
             {
                 this.DumpImages();
 
@@ -94,50 +103,52 @@ namespace SpirV___get_fail_reasons
             foreach (JobSetSessionNS.JobSetSession jobSetSession in DataAnalyzer.JobSetSession.JobSetSessions)
             {
                 hyperlink = this.GetJobsetSessionHyperlink(jobSetSession);
-                if (jobSetSession.Status.ToLower() == "completed" && jobSetSession.BusinessAttributes.Planning.Attributes.Environment.ToLower() == "silicon")
+                jsonResult = this.DataAnalyzer.webClient.DownloadString(hyperlink);
+                GTAX_Jobs jobs = JsonConvert.DeserializeObject<GTAX_Jobs>(jsonResult);
+                jsonResult = "";
+
+                foreach (Job job in jobs.Jobs)
                 {
-                    jsonResult = this.DataAnalyzer.webClient.DownloadString(hyperlink);
-                    JobSet jobSet = JsonConvert.DeserializeObject<JobSet>(jsonResult);
-                    jsonResult = "";
-
-                    foreach (Job job in jobSet.Jobs)
+                    foreach (Result result in job.Results)
                     {
-                        foreach (Result result in job.Results)
+                        if (result.PhaseName == "tests" && result.Command.ToLower().Contains("test_trace")) //result.Status.ToLower() == "failed"
                         {
-                            if (result.PhaseName == "tests" && result.Status.ToLower() == "failed")
+                            if (result.Artifacts != null)
                             {
-                                if (result.Artifacts != null)
+                                String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
+                                foreach (String taskLog in result.Artifacts.TaskLogs)
                                 {
-                                    String testNumber = Regex.Split(result.GtaResultKey, @"\D+").Last();
-                                    String testName = "";
-                                    foreach (String taskLog in result.Artifacts.TaskLogs)
+                                    string framesType = @"(result)"; //@"(reference)|(result)"
+                                    if (Regex.IsMatch(taskLog, $@".*f\d+\._{framesType}_\d+\.png"))
                                     {
-                                        if (Regex.IsMatch(taskLog, @".*_ref.png") || Regex.IsMatch(taskLog, @".*_test.png"))
-                                        {
-                                            hyperlink = $"http://gtax-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
-                                            testName = result.BusinessAttributes.ItemName + "{" + hyperlink.Split('/').Last();
-                                            testName = testName.Replace(".png", "}.png");
+                                        hyperlink = $"http://gtax-igk.intel.com/logs/jobs/jobs/0000/{result.JobID.Substring(0, 4)}/{result.JobID}/logs/tests/{testNumber}/{taskLog}";
 
-                                            try
+                                        try
+                                        {
+                                            using (Stream stream = DataAnalyzer.webClient.OpenRead(hyperlink))
                                             {
-                                                using (Stream stream = DataAnalyzer.webClient.OpenRead(hyperlink))
-                                                {
-                                                    this.Images.Add(Image.FromStream(stream), testName);
-                                                    ImagesCounter++;
-                                                    Console.Out.WriteLine($"Found corrupted image: {testName}. Image no. {ImagesCounter}");
-                                                    this.SaveImages();
-                                                }
+                                                this.Images.Add(Image.FromStream(stream), new List<string>()
+                                                { 
+                                                    job.ID,
+                                                    result.ID,
+                                                    testNumber,
+                                                    result.BusinessAttributes.ItemName,
+                                                    taskLog 
+                                                });
+                                                ImagesCounter++;
+                                                Console.Out.WriteLine($"Found corrupted image: {taskLog}. Image no. {ImagesCounter}");
+                                                this.SaveImages();
                                             }
-                                            catch (Exception ex)
-                                            {
-                                                Console.Out.WriteLine(ex.Message + " " + hyperlink);
-                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.Out.WriteLine(ex.Message + " " + hyperlink);
                                         }
                                     }
                                 }
                             }
                         }
-                    }                  
+                    }
                 }
             }
             this.SaveImages(true);

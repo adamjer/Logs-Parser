@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SpirV___get_fail_reasons.GTAX;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -84,7 +85,7 @@ namespace SpirV___get_fail_reasons
             List<String> parsedLogs = new List<String>();
             if (log.Contains(sentence))
             {
-                parsedLogs.Add("File: " + taskLog + Environment.NewLine + log.Substring(log.Length - length));
+                parsedLogs.Add("File: " + taskLog + Environment.NewLine + log.Substring(log.Length > length ? log.Length - length : 0));
             }
 
             return parsedLogs;
@@ -100,10 +101,10 @@ namespace SpirV___get_fail_reasons
                 if (true)
                 {
                     jsonResult = this.DataAnalyzer.webClient.DownloadString(hyperlink);
-                    JobSet jobSet = JsonConvert.DeserializeObject<JobSet>(jsonResult);
+                    GTAX_Jobs jobs = JsonConvert.DeserializeObject<GTAX_Jobs>(jsonResult);
                     jsonResult = "";
 
-                    foreach (Job job in jobSet.Jobs)
+                    foreach (Job job in jobs.Jobs)
                     {
                         Parallel.ForEach(job.Results, result =>
                             {
@@ -262,17 +263,17 @@ namespace SpirV___get_fail_reasons
                                                 Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
                                             }
 
-                                            try
-                                            {
-                                                if (task.ParsedResults.Count == 0)
-                                                    task.ParsedResults.AddRange(ParseExceptionLastLines(log, "failed with exception, what():", 2000, "Cobalt2.log"));
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                Console.Out.WriteLine(ex.Message);
-                                                Console.Out.WriteLine("Download log: " + ex.Message);
-                                                Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
-                                            }
+                                            //try
+                                            //{
+                                            //    if (task.ParsedResults.Count == 0)
+                                            //        task.ParsedResults.AddRange(ParseExceptionLastLines(log, "failed with exception, what():", 2000, "Cobalt2.log"));
+                                            //}
+                                            //catch (Exception ex)
+                                            //{
+                                            //    Console.Out.WriteLine(ex.Message);
+                                            //    Console.Out.WriteLine("Download log: " + ex.Message);
+                                            //    Console.Out.WriteLine("\tHyperlink: " + downloadHyperLink);
+                                            //}
 
                                             try
                                             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SpirV___get_fail_reasons
@@ -10,7 +11,7 @@ namespace SpirV___get_fail_reasons
     class Program
     {
         public static ExecutionType executionType = ExecutionType.GetSpirV;
-        public static EnvironmentType environment = EnvironmentType.Silicon;
+        public static string instance = "gtax-igk.intel.com";
         public static ExcelDataSaveType excelSaveType = ExcelDataSaveType.Basic;
         public static string outputPath = @"\\samba-users.igk.intel.com\samba\Users\ajerecze\NNImages";
         public static double passRatio = 0.0;
@@ -48,6 +49,8 @@ namespace SpirV___get_fail_reasons
                         executionType = ExecutionType.GetFatalsFromCobalt;
                     else if (args[i + 1].ToLower() == "getgitsplayerlogs")
                         executionType = ExecutionType.GetGitsPlayerLogs;
+                    else if (args[i + 1].ToLower() == "getjoboutputlogs")
+                        executionType = ExecutionType.GetJobOutputAnalyzer;
                     args = RemoveUsedArguments(args, i);
                     break;
                 }
@@ -99,19 +102,13 @@ namespace SpirV___get_fail_reasons
             }
         }
 
-        //choose environment
-        private static void ParseEnvironment(ref string[] args)
+        private static void ParseGTAXInstance(ref string[] args)
         {
             for (int i = 0; i < args.Length; i++)
             {
-                if (args[i].ToLower() == "-environment")
+                if (args[i].ToLower() == "-instance")
                 {
-                    if (args[i + 1].ToLower() == "silicon")
-                        environment = EnvironmentType.Silicon;
-                    else if (args[i + 1].ToLower() == "simulation")
-                        environment = EnvironmentType.Simulation;
-                    else if (args[i + 1].ToLower() == "emulation")
-                        environment = EnvironmentType.Emulation;
+                    instance = Regex.Replace(args[i + 1], @"^(http)s?://", string.Empty);
 
                     args = RemoveUsedArguments(args, i);
                     break;
@@ -146,7 +143,7 @@ namespace SpirV___get_fail_reasons
             ParseConformancePassRatio(ref args);
             ParseWriteExcelType(ref args);
             ParseClear(ref args);
-            ParseEnvironment(ref args);
+            ParseGTAXInstance(ref args);
         }
 
         static void Main(string[] args)
@@ -165,6 +162,8 @@ namespace SpirV___get_fail_reasons
                 analyzer = new FatalsFromCobaltAnalyzer();
             if (executionType == ExecutionType.GetGitsPlayerLogs)
                 analyzer = new GitsPlayerLogsAnalyzer();
+            if (executionType == ExecutionType.GetJobOutputAnalyzer)
+                analyzer = new JobOutputAnalyzer();
 
             try
             {

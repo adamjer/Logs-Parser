@@ -239,9 +239,10 @@ namespace SpirV___get_fail_reasons
                 workSheets.Add(workBook.ActiveSheet);
 
                 workSheets[0].Name = DataAnalyzer.Name;
-                const int testNameColumn = 1, statusColumn = 2, gtaxLinkColumn = 3;
+                const int testNameColumn = 1, statusColumn = 2, machineColumn = 3, gtaxLinkColumn = 4;
                 workSheets[0].Cells[1, testNameColumn] = "Test Name";
                 workSheets[0].Cells[1, statusColumn] = "Status";
+                workSheets[0].Cells[1, machineColumn] = "Machine";
                 workSheets[0].Cells[1, gtaxLinkColumn] = "GTA-X Link";
 
                 int row;
@@ -250,6 +251,7 @@ namespace SpirV___get_fail_reasons
                     row = i + 2;
                     workSheets[0].Cells[row, testNameColumn] = Results[i].Name;
                     workSheets[0].Cells[row, statusColumn] = Results[i].Status;
+                    workSheets[0].Cells[row, machineColumn] = Results[i].Machine;
                     workSheets[0].Hyperlinks.Add(workSheets[0].Cells[row, gtaxLinkColumn], Results[i].Link, Type.Missing, Results[i].Link, Results[i].Link);
 
                     for(int j = 0; j < Results[i].ParsedResults.Count; j++)

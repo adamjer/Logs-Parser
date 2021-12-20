@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace JobSetSessionNS
 {
-    namespace BusinessAttributesNS
+    namespace BusinessAttributesNS.GTAX
     {
         public class BusinessAttributes
         {
@@ -49,6 +49,6 @@ namespace JobSetSessionNS
         public String Status { get; set; }
 
         [JsonProperty(PropertyName = "business_attr")]
-        public BusinessAttributesNS.BusinessAttributes BusinessAttributes { get; set; }
+        public BusinessAttributesNS.GTAX.BusinessAttributes BusinessAttributes { get; set; }
     }
 }
